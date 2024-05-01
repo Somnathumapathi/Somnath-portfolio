@@ -40,6 +40,12 @@ const projects = [
         techstack: ["Flutter", "Flask"]
     },
     {
+        title: "Py-notes-formatter",
+        description: "Formats notes according to the orientation and converts it to pdf",
+        link: "https://github.com/Somnathumapathi/Py-notes-formatter",
+        techstack: ["Python"]
+    },
+    {
         title: "RedFrontier",
         description: "Mars colonization helpmate",
         link: "https://github.com/synapsecode/RedFrontier",
