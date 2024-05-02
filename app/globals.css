@@ -31,6 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+  *{
+    color: white;
+  }
 
 .bg-glow {
   width: calc(100% + 20px); 
