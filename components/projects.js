@@ -41,9 +41,9 @@ const projects = [
     },
     {
         title: "Py-notes-formatter",
-        description: "Formats notes according to the orientation and converts it to pdf",
+        description: "Flask website that formats notes according to the orientation and converts it to pdf",
         link: "https://github.com/Somnathumapathi/Py-notes-formatter",
-        techstack: ["Python"]
+        techstack: ["Python", "Flask"]
     },
     {
         title: "RedFrontier",
