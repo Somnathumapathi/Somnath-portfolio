@@ -4,7 +4,7 @@ function Experience() {
     const experience = [
         {
             company: "Zylu",
-            team : ["Testing", "Flutter Development"],
+            team : ["Product engineering team"],
         },
         {
             company: "Yoga Clan",
