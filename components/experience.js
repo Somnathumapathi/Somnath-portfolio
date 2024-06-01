@@ -7,7 +7,7 @@ function Experience() {
             team : ["Product engineering team"],
         },
         {
-            company: "Yoga Clan",
+            company: "Win Research",
             team: ["App development"]
         }
     ]
