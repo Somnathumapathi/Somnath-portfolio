@@ -8,7 +8,7 @@ function Experience() {
         },
         {
             company: "Win Research",
-            team: ["App development"]
+            team: ["Full Stack Developer"]
         }
     ]
   return (
