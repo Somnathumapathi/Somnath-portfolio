@@ -4,6 +4,12 @@ function Projects() {
 
 const projects = [
     {
+        title: "Medical-Assistant",
+        link: "https://github.com/Somnathumapathi/Medical-assistant",
+        description: "Heart attack detection and report generation from conversation",
+        techstack: ["Flutter", "Firebase", "Tenserflow"]
+    },
+    {
         title: "Crave Hub",
         link: "https://github.com/Somnathumapathi/CraveHub",
         description: "Health conscious food ordering website.",

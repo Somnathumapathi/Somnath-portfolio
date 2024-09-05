@@ -4,11 +4,11 @@ function Experience() {
     const experience = [
         {
             company: "Zylu",
-            team : ["Testing", "Flutter Development"],
+            team : ["Product engineering team"],
         },
         {
-            company: "Yoga Clan",
-            team: ["App development"]
+            company: "Win Research",
+            team: ["Full Stack Developer"]
         }
     ]
   return (
