@@ -4,6 +4,12 @@ function Projects() {
 
 const projects = [
     {
+        title: "chETHFunds",
+        link: "https://github.com/Somnathumapathi/chEthFunds",
+        description: "Implemented chitfunds using blockchain",
+        techstack: ["Next js", "Hardhat js", "Viem", "Supabase"]
+    },
+    {
         title: "Medical-Assistant",
         link: "https://github.com/Somnathumapathi/Medical-assistant",
         description: "Heart attack detection and report generation from conversation",
@@ -31,12 +37,6 @@ const projects = [
         title: "Worcse",
         description: "Website for demand creator and supply provider contracts",
         link: "https://github.com/KoushikMCN/Worcse",
-        techstack: ["NextJS", "Firebase", "Solidity"]
-    },
-    {
-        title: "chEthFunds",
-        description: "Chitfunds using blockchain",
-        link: "https://github.com/synapsecode/chETHFunds",
         techstack: ["NextJS", "Firebase", "Solidity"]
     },
     {

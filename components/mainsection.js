@@ -14,7 +14,7 @@ function MainSection() {
                 </Link>
         </div>
         <div className='relative'>
-            <div className='w-40 h-40'>
+            <div className='w-52 h-52'>
                 <img className='h-full w-full rounded-full' src='images/portphoto.jpeg'></img>
             </div>
             <div className='bg-glow h-full w-full absolute top-[40%] right-1/2'></div>

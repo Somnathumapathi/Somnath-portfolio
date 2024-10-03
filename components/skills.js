@@ -1,5 +1,5 @@
 import React from 'react'
-import {SiFlutter, SiNextdotjs, SiFirebase, SiMongodb, SiExpress, SiJavascript, SiPython, SiSolidity} from 'react-icons/si';
+import {SiFlutter, SiNextdotjs, SiFirebase, SiMongodb, SiExpress, SiJavascript, SiPython, SiSolidity, SiReact, SiFlask, SiEthereum} from 'react-icons/si';
 import {FaJava} from 'react-icons/fa'
 
 function Skills() {
@@ -40,6 +40,18 @@ function Skills() {
             name : 'Solidity',
             Icon : SiSolidity
         },
+        {
+            name : 'React',
+            Icon : SiReact
+        },
+        {
+            name : 'Flask',
+            Icon : SiFlask
+        },
+        {
+            name : 'Ethereum',
+            Icon : SiEthereum
+        }
     ]
   return (    
     <div><div>
