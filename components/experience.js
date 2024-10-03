@@ -3,11 +3,11 @@ import React from 'react'
 function Experience() {
     const experience = [
         {
-            company: "Zylu",
-            team : ["Product engineering team"],
+            company: "Zylu.co",
+            team : ["Product Engineer"],
         },
         {
-            company: "Win Research",
+            company: "Win Research Centre",
             team: ["Full Stack Developer"]
         }
     ]
