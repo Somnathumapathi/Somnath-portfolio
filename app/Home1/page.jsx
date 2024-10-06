@@ -13,7 +13,7 @@ import {FaJava} from 'react-icons/fa'
 
 const Button = ({ children, className, ...props }) => (
   <button
-    className={`px-4 py-2 rounded-md transition-colors ${className.replace(/'/g, '&apos;')}`}
+    className={`px-4 py-2 rounded-md ${className.replace(/'/g, '&apos;')}`}
     {...props}
   >
     {children}
