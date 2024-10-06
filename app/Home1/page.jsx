@@ -1,15 +1,19 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 import { Terminal, Smartphone, Globe, Code, Briefcase, Mail, User, Cpu, Download, Home, ArrowLeft, Moon, Sun, Wifi, Battery, Settings, Music } from 'lucide-react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import { LampContainer } from "../../components/ui/lamp";
 import Skills from '@/components/skills'
-import {SiFlutter, SiNextdotjs, SiFirebase, SiMongodb, SiExpress, SiJavascript, SiPython, SiSolidity, SiReact, SiFlask, SiEthereum} from 'react-icons/si';
+import {SiFlutter, SiNextdotjs, SiFirebase, SiMongodb, SiExpress, SiJavascript, SiPython, SiSolidity, SiReact, SiFlask, SiEthereum, SiSpotify} from 'react-icons/si';
 import {FaJava} from 'react-icons/fa'
+import { Spotify } from 'react-spotify-embed'
+import { TextRevealCard } from '@/components/ui/text-reveal-card'
+import Projects from '@/components/projects'
+import Link from 'next/link'
 
 const Button = ({ children, className, ...props }) => (
   <button
@@ -34,10 +38,10 @@ const Textarea = ({ className, ...props }) => (
   />
 )
 
-const AppIcon = ({ icon: Icon, title, onClick, isDarkMode }) => (
+const AppIcon = ({ icon: Icon, title, onClick, isDarkMode, color }) => (
   <div className="flex flex-col items-center" onClick={onClick}>
     <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
-      <Icon size={32} className={isDarkMode ? 'text-white' : 'text-gray-900'} />
+      <Icon size={32} className="text-green-600" />
     </div>
     <span className={`mt-2 text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{title}</span>
   </div>
@@ -134,7 +138,7 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
         return (
           <div className="relative h-full">
             <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(/images/myprofile.jpg)` }}></div>
-            <div className={`absolute inset-0 ${isDarkMode ? 'bg-black' : 'bg-white'} opacity-50`}></div>
+            <div className={`absolute inset-0 ${isDarkMode ? 'bg-black' : 'bg-white'} opacity-10`}></div>
             <div className="relative z-10 grid grid-cols-3 gap-4 p-4">
               <AppIcon icon={User} title="About" onClick={() => setActiveScreen('about')} isDarkMode={isDarkMode} />
               <AppIcon icon={Cpu} title="Skills" onClick={() => setActiveScreen('skills')} isDarkMode={isDarkMode} />
@@ -143,8 +147,10 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
               <AppIcon icon={Mail} title="Contact" onClick={() => setActiveScreen('contact')} isDarkMode={isDarkMode} />
               <AppIcon icon={Download} title="Download CV" onClick={() => setActiveScreen('download')} isDarkMode={isDarkMode} />
               <AppIcon icon={Settings} title="Settings" onClick={() => setActiveScreen('settings')} isDarkMode={isDarkMode} />
-              <AppIcon icon={Music} title="Spotify" onClick={() => setActiveScreen('spotify')} isDarkMode={isDarkMode} />
+              <AppIcon icon={SiSpotify} title="Spotify" onClick={() => setActiveScreen('spotify')} isDarkMode={isDarkMode} color={'text-green'}/>
+                
             </div>
+            
           </div>
         )
       case 'about':
@@ -159,76 +165,14 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
           <div>
             {/* <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Skills</h2> */}
             <Skills></Skills>
-            {/* <motion.ul className="space-y-2">
-              {[
-                 {
-                  name : 'Flutter',
-                  Icon : SiFlutter
-              },
-              {
-                  name : 'NextJS',
-                  Icon : SiNextdotjs
-              },
-              {
-                  name : 'ExpressJS',
-                  Icon : SiExpress
-              },
-              {
-                  name : 'FireBase',
-                  Icon : SiFirebase
-              },
-              {
-                  name : 'MongoDb',
-                  Icon : SiMongodb
-              },
-             
-              {
-                  name : 'Javascript',
-                  Icon : SiJavascript
-              },
-              {
-                  name : 'Java',
-                  Icon : FaJava},
-                  {
-                  name : 'Python',
-                      Icon : SiPython
-                  },
-              {
-                  name : 'Solidity',
-                  Icon : SiSolidity
-              },
-              {
-                  name : 'React',
-                  Icon : SiReact
-              },
-              {
-                  name : 'Flask',
-                  Icon : SiFlask
-              },
-              {
-                  name : 'Ethereum',
-                  Icon : SiEthereum
-              }
-              ].map((skill, index) => (
-                <motion.li
-                  key={index}
-                  className={`flex items-center ${textColor}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <skill.Icon className="mr-2" /> {skill.name}
-                
-                </motion.li>
-              ))}
-            </motion.ul> */}
           </div>
         )
       case 'projects':
         return (
           <div>
             <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Projects</h2>
-            <motion.ul className="space-y-4">
+            <Projects/>
+            {/* <motion.ul className="space-y-4">
               {[
                 { title: 'DeFi Platform', description: 'A decentralized finance platform built with Solidity and React.' },
                 { title: 'E-commerce Mobile App', description: 'A full-featured e-commerce app developed with React Native and Node.js.' },
@@ -244,7 +188,7 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
                   <p className={textColor}>{project.description}</p>
                 </motion.li>
               ))}
-            </motion.ul>
+            </motion.ul> */}
           </div>
         )
       case 'experience':
@@ -253,9 +197,14 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
             <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Experience</h2>
             <motion.ul className="space-y-4">
               {[
-                { title: 'Senior Full Stack Developer', company: 'TechCorp Inc.', period: '2020 - Present', description: 'Led development of multiple web and mobile applications using React, Node.js, and React Native.' },
-                { title: 'Blockchain Developer', company: 'CryptoInnovate', period: '2018 - 2020', description: 'Developed smart contracts and decentralized applications using Solidity and Web3.js.' },
-                { title: 'Web Developer', company: 'WebSolutions Co.', period: '2016 - 2018', description: 'Created responsive websites and web applications using JavaScript and PHP.' }
+                  {
+                    company: "Zylu.co",
+                    team : "Product Engineer",
+                },
+                {
+                    company: "Win Research Centre",
+                    team: "Full Stack Developer"
+                }
               ].map((job, index) => (
                 <motion.li
                   key={index}
@@ -263,9 +212,15 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.3 }}
                 >
-                  <h3 className={`text-xl font-semibold ${textColor}`}>{job.title}</h3>
-                  <p className={textColor}>{job.company} | {job.period}</p>
-                  <p className={textColor}>{job.description}</p>
+                   <div key={index} className="shadow-md border rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                        <div className="p-4">
+                            <h2 className="text-xl font-semibold mb-2">{job.company}</h2>
+                            <p className="text-blue-700 mb-4">Team: {job.team}</p>
+                        </div>
+                    </div>
+                  {/* <h3 className={`text-xl font-semibold ${textColor}`}>{job.team}</h3>
+                  <p className={textColor}>{job.company}</p> */}
+                  {/* <p className={textColor}>{job.description}</p> */}
                 </motion.li>
               ))}
             </motion.ul>
@@ -273,9 +228,13 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
         )
       case 'contact':
         return (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Contact Me</h2>
-            <Input
+          <div className="space-y-4">
+            {/* <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Contact Me</h2> */}
+            <TextRevealCard
+        text="You know the business"
+        revealText="I know the chemistry "
+      ></TextRevealCard>
+            {/* <Input
               type="text"
               placeholder="Name"
               value={name}
@@ -297,9 +256,12 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
               onChange={(e) => setMessage(e.target.value)}
               required
               className={isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
-            />
-            <Button type="submit" className={`w-full ${isDarkMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600'}`}>Send Message</Button>
-          </form>
+            /> */}
+ <Link href={"mailto:somnathumapathi7@gmail.com"} className='inline-block'>
+ <Button  className={`w-full ${isDarkMode ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-blue-500 text-white hover:bg-blue-600'}`}>Contact Me</Button>
+        </Link>
+            
+          </div>
         )
       case 'download':
         return (
@@ -329,9 +291,12 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
         )
       case 'spotify':
         return (
-          <div className="space-y-4">
-            <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Spotify</h2>
-            <div className={`p-4 rounded-lg ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
+          <div className="align-middle">
+           <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Spotify</h2>
+           <Spotify wide link="https://open.spotify.com/track/6Tsu3OsuMz4KEGKbOYd6A0?si=qDb1er4SSrS1jGeo-94EHg" /><br></br>
+           <Spotify wide link="https://open.spotify.com/track/7o3gnrSdBN1yJeyDd3ysWX?si=ff7_2z_jQMqiSwIhGWnuug" /><br></br>
+           <Spotify wide link="https://open.spotify.com/track/0xN4nwgOWg59k0t94CJAj4?si=1YaakP-lQp-RrxNW39arEg" />
+            {/*  <div className={`p-4 rounded-lg ${isDarkMode ? 'bg-gray-800' : 'bg-gray-200'}`}>
               <div className="flex justify-between items-center mb-4">
                 <div>
                   <h3 className={`font-semibold ${textColor}`}>{currentSong.title}</h3>
@@ -347,7 +312,8 @@ const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode 
               <div className={`h-1 w-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-300'}`}>
                 <div className={`h-full w-1/3 ${isDarkMode ? 'bg-green-600' : 'bg-green-500'}`}></div>
               </div>
-            </div>
+            </div> */}
+            
           </div>
         )
       default:
@@ -396,8 +362,10 @@ export default function Component() {
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'} text-white font-mono`}>
+      
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
+          
         {/* <LampContainer>
       <motion.h1
         initial={{ opacity: 0.5, y: 100 }}
@@ -426,12 +394,14 @@ export default function Component() {
               <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
               <pointLight position={[-10, -10, -10]} />
               <Phone isDarkMode={isDarkMode}>
+                
                 <PhoneScreen
                   activeScreen={activeScreen}
                   setActiveScreen={setActiveScreen}
                   isDarkMode={isDarkMode}
                   setIsDarkMode={setIsDarkMode}
                 />
+                
               </Phone>
             </Canvas>
           </div>
@@ -451,7 +421,9 @@ export default function Component() {
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Button>
               ))}
+              
             </div>
+            
           </div>
         </div>
       </div>
