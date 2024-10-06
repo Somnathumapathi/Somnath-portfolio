@@ -22,7 +22,7 @@ const Button = ({ children, className, ...props }) => (
 
 const Input = ({ className, ...props }) => (
   <input
-    className={`w-full p-2 rounded-md ${className}`}
+    className={`w-full p-2 rounded-md ${className.replace(/'/g, '&apos;')}`}
     {...props}
   />
 )
