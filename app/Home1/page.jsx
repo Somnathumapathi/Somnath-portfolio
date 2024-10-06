@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { color, motion } from 'framer-motion'
 import { Terminal, Smartphone, Globe, Code, Briefcase, Mail, User, Cpu, Download, Home, ArrowLeft, Moon, Sun, Wifi, Battery, Settings, Music } from 'lucide-react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera, Html, useGLTF, Environment } from '@react-three/drei'
 import * as THREE from 'three'
 import { LampContainer } from "../../components/ui/lamp";
 import Skills from '@/components/skills'
@@ -14,6 +14,7 @@ import { Spotify } from 'react-spotify-embed'
 import { TextRevealCard } from '@/components/ui/text-reveal-card'
 import Projects from '@/components/projects'
 import Link from 'next/link'
+import { PhoneModel } from '@/components/phone'
 
 const Button = ({ children, className, ...props }) => (
   <button
@@ -49,6 +50,7 @@ const AppIcon = ({ icon: Icon, title, onClick, isDarkMode, color }) => (
 
 const Phone = ({ children, isDarkMode }) => {
   const phoneRef = useRef()
+
   const { viewport } = useThree()
 
   useFrame((state) => {
@@ -58,46 +60,74 @@ const Phone = ({ children, isDarkMode }) => {
   })
 
   return (
-    <group ref={phoneRef} scale={[1.2, 1.2, 1.2]}>
-      {/* Phone body */}
-      <mesh>
-        <boxGeometry args={[2.4, 5, 0.2]} />
-        <meshStandardMaterial color={isDarkMode ? '#333' : '#fff'} />
-      </mesh>
-
-      {/* Screen */}
-      <mesh position={[0, 0, 0.101]}>
-        <planeGeometry args={[2.2, 4.8]} />
-        <meshBasicMaterial color={isDarkMode ? '#000' : '#fff'} />
-      </mesh>
-
-      {/* Home button */}
-      <mesh position={[0, -2.3, 0.101]}>
-        <circleGeometry args={[0.2, 32]} />
-        <meshStandardMaterial color={isDarkMode ? '#222' : '#e0e0e0'} />
-      </mesh>
-
-      {/* Camera */}
-      <mesh position={[0, 2.3, 0.101]}>
-        <circleGeometry args={[0.1, 32]} />
-        <meshStandardMaterial color="#111" />
-      </mesh>
-
-      {/* Speaker */}
-      <mesh position={[0, 2.1, 0.101]}>
-        <boxGeometry args={[0.4, 0.05, 0.01]} />
-        <meshStandardMaterial color="#111" />
-      </mesh>
-
-      {/* Screen content */}
-      <Html transform occlude position={[0, 0, 0.11]} scale={[0.22, 0.22, 0.22]}>
-        <div className="w-[390px] h-[844px] overflow-hidden">
-          {children}
-        </div>
-      </Html>
-    </group>
+    // <Canvas>
+      // <OrbitControls />
+      // <Environment preset='city'/>
+      <group ref={phoneRef} scale={[1.2, 1.2, 1.2]}>
+        {/* Phone body */}
+        <PhoneModel/>
+        {/* Screen content */}
+        <Html transform occlude position={[0, 0, 0.11]} scale={[0.22, 0.22, 0.22]}>
+          <div className="w-[390px] h-[844px] overflow-hidden">
+            {children}
+          </div>
+        </Html>
+      </group>
+    //{/* </Canvas> */}
   )
 }
+
+// const Phone = ({ children, isDarkMode }) => {
+//   const phoneRef = useRef()
+//   const { viewport } = useThree()
+
+//   useFrame((state) => {
+//     const time = state.clock.getElapsedTime()
+//     phoneRef.current.rotation.x = Math.sin(time / 4) / 16
+//     phoneRef.current.rotation.y = Math.sin(time / 2) / 8
+//   })
+
+//   return (
+//     <group ref={phoneRef} scale={[1.2, 1.2, 1.2]}>
+//       {/* Phone body */}
+//       <mesh>
+//         <boxGeometry args={[2.4, 5, 0.2]} />
+//         <meshStandardMaterial color={isDarkMode ? '#333' : '#fff'} />
+//       </mesh>
+
+//       {/* Screen */}
+//       <mesh position={[0, 0, 0.101]}>
+//         <planeGeometry args={[2.2, 4.8]} />
+//         <meshBasicMaterial color={isDarkMode ? '#000' : '#fff'} />
+//       </mesh>
+
+//       {/* Home button */}
+//       <mesh position={[0, -2.3, 0.101]}>
+//         <circleGeometry args={[0.2, 32]} />
+//         <meshStandardMaterial color={isDarkMode ? '#222' : '#e0e0e0'} />
+//       </mesh>
+
+//       {/* Camera */}
+//       <mesh position={[0, 2.3, 0.101]}>
+//         <circleGeometry args={[0.1, 32]} />
+//         <meshStandardMaterial color="#111" />
+//       </mesh>
+
+//       {/* Speaker */}
+//       <mesh position={[0, 2.1, 0.101]}>
+//         <boxGeometry args={[0.4, 0.05, 0.01]} />
+//         <meshStandardMaterial color="#111" />
+//       </mesh>
+
+//       {/* Screen content */}
+//       <Html transform occlude position={[0, 0, 0.11]} scale={[0.22, 0.22, 0.22]}>
+//         <div className="w-[390px] h-[844px] overflow-hidden">
+//           {children}
+//         </div>
+//       </Html>
+//     </group>
+//   )
+// }
 
 const PhoneScreen = ({ activeScreen, setActiveScreen, isDarkMode, setIsDarkMode }) => {
   const [name, setName] = useState('')
@@ -423,10 +453,10 @@ export default function Component() {
               ))}
               
             </div>
-            
           </div>
         </div>
       </div>
+     
       <footer className={`mt-12 py-6 text-center ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
         <div className="flex justify-center space-x-4 mb-4">
           <a href="#" className={`${isDarkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'}`}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>

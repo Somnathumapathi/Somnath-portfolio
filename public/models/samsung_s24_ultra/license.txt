@@ -1,0 +1,11 @@
+Model Information:
+* title:	Samsung s24 ultra
+* source:	https://sketchfab.com/3d-models/samsung-s24-ultra-b05e35cc5fa540cba52e055b378c28bd
+* author:	Sketcher (https://sketchfab.com/jnanbr07)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Samsung s24 ultra" (https://sketchfab.com/3d-models/samsung-s24-ultra-b05e35cc5fa540cba52e055b378c28bd) by Sketcher (https://sketchfab.com/jnanbr07) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
