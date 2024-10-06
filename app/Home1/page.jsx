@@ -29,7 +29,7 @@ const Input = ({ className, ...props }) => (
 
 const Textarea = ({ className, ...props }) => (
   <textarea
-    className={`w-full p-2 rounded-md ${className}`}
+  className={`w-full p-2 rounded-md ${className.replace(/'/g, '&apos;')}`}
     {...props}
   />
 )
