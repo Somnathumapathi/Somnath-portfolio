@@ -9,6 +9,10 @@ function Experience() {
         {
             company: "Win Research Centre",
             team: ["Full Stack Developer"]
+        },
+        {
+            company: "Fit Choice World",
+            team: ["Full Stack Developer, Product Manager"]
         }
     ]
   return (
