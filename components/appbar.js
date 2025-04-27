@@ -27,6 +27,13 @@ const AppBar = () => {
                         <Icon className='w-5 h-5 hover:scale-125 transition-all hover:text-orange-500'/>
                     </Link>
                 })}
+                 <a 
+                    href="/files/Somnath_U.pdf" 
+                    download 
+                    className='text-sm font-semibold px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-all'
+                >
+                    Download Resume 📄
+                </a>
             </div>
         </nav>
     )
