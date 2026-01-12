@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Apple, Wifi, Battery, Search, Volume2, Bluetooth } from 'lucide-react';
-
+import { FaApple } from 'react-icons/fa'
 const MenuBar: React.FC = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -48,7 +48,7 @@ const MenuBar: React.FC = () => {
       {/* Left side - Apple logo and menus */}
       <div className="flex items-center gap-5">
         <button className="hover:bg-white/10 rounded px-1.5 py-0.5 transition-colors">
-          <Apple className="w-4 h-4 text-white/90 fill-white/90" />
+          <FaApple className="w-4 h-4 text-white/90" />
         </button>
         
         {menuItems.map((menu) => (

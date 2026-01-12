@@ -11,6 +11,10 @@ import {
   ProfileWidget,
   SkillsWidget,
   ExperienceWidget,
+  GitHubWidget,
+  ActivityWidget,
+  QuoteWidget,
+  PerformanceWidget,
 } from '@/components/widgets/DesktopWidgets';
 import AboutSection from '@/components/AboutSection';
 import ExperienceSection from '@/components/ExperienceSection';
@@ -52,17 +56,25 @@ const Index = () => {
       <MenuBar />
       
       {/* Desktop Widgets */}
-      <div className="fixed top-10 left-4 z-20 flex flex-col gap-3 pt-4">
-        <div className="flex gap-3">
+      <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
+        {/* <div className="flex gap-3">
           <CalendarWidget />
           <WeatherWidget />
         </div>
-        <WorldClockWidget />
-        <div className="flex gap-3">
+        <WorldClockWidget /> */}
+        <div className="flex gap-4">
           <ProfileWidget onClick={() => openWindow('about')} />
           <SkillsWidget />
         </div>
-        <ExperienceWidget />
+        <div className="flex gap-4">
+          <ExperienceWidget />
+          <GitHubWidget />
+        </div>
+        <div className="flex gap-4">
+          <ActivityWidget />
+          <PerformanceWidget />
+        </div>
+        <QuoteWidget />
       </div>
 
       {/* App Windows */}

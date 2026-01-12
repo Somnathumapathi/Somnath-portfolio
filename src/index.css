@@ -116,11 +116,11 @@
   }
 
   .widget-small {
-    @apply w-32;
+    @apply w-52;
   }
 
   .widget-medium {
-    @apply w-44;
+    @apply w-64;
   }
 
   .widget-wide {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin } from 'lucide-react';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen } from 'lucide-react';
+import somnathPhoto from '@/assets/somnath-photo.jpg';
 
 // Calendar Widget
 export const CalendarWidget: React.FC = () => {
@@ -111,24 +112,34 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.6 }}
-      className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-transform"
+      className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
       onClick={onClick}
     >
       <div className="flex items-center gap-3 mb-3">
-        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg">
-          S
+        <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/20">
+          <img 
+            src={somnathPhoto} 
+            alt="Somnath" 
+            className="w-full h-full object-cover"
+          />
         </div>
         <div>
-          <div className="text-white font-semibold">Somnath</div>
-          <div className="text-white/60 text-sm">Full Stack Developer</div>
+          <div className="text-white font-semibold text-base">Somnath Umapathi</div>
+          <div className="text-white/70 text-xs">Full Stack Developer</div>
         </div>
       </div>
-      <div className="flex items-center gap-1 text-white/50 text-xs">
+      <div className="flex items-center gap-1 text-white/50 text-xs mb-2">
         <MapPin className="w-3 h-3" />
         <span>Bangalore, India</span>
       </div>
-      <div className="mt-3 pt-3 border-t border-white/10">
-        <div className="text-white/60 text-xs">Click to view portfolio</div>
+      <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-1 text-green-400 text-xs">
+          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span>Available for work</span>
+        </div>
+      </div>
+      <div className="pt-2 border-t border-white/10">
+        <div className="text-white/60 text-xs">🚀 Click to view portfolio</div>
       </div>
     </motion.div>
   );
@@ -192,6 +203,152 @@ export const ExperienceWidget: React.FC = () => {
         <div className="text-center">
           <div className="text-lg font-semibold text-blue-400">10+</div>
           <div className="text-[10px] text-white/50">Tech Stack</div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// GitHub Activity Widget
+export const GitHubWidget: React.FC = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.9 }}
+      className="widget widget-small bg-gradient-to-br from-gray-800/80 to-gray-900/80"
+    >
+      <div className="flex items-center gap-2 mb-3">
+        <Github className="w-4 h-4 text-white" />
+        <span className="text-white text-xs font-semibold">GitHub</span>
+      </div>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-white/60 text-xs">Commits this week</span>
+          <span className="text-green-400 font-semibold">24</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-white/60 text-xs">Current Streak</span>
+          <span className="text-orange-400 font-semibold">12 days</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-white/60 text-xs">Public Repos</span>
+          <span className="text-blue-400 font-semibold">18</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Current Activity Widget
+export const ActivityWidget: React.FC = () => {
+  const [time, setTime] = useState(new Date());
+  
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const hour = time.getHours();
+  const activity = hour >= 9 && hour < 18 
+    ? { icon: Code2, text: "Deep Work Mode", color: "text-purple-400" }
+    : hour >= 18 && hour < 22
+    ? { icon: Coffee, text: "Learning Time", color: "text-orange-400" }
+    : { icon: Zap, text: "Off Hours", color: "text-blue-400" };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.0 }}
+      className="widget widget-small"
+    >
+      <div className="flex items-center gap-2 mb-2">
+        <activity.icon className={`w-5 h-5 ${activity.color}`} />
+        <span className="text-white font-medium text-sm">{activity.text}</span>
+      </div>
+      <div className="text-white/50 text-xs">
+        {hour >= 9 && hour < 18 && "Building amazing things"}
+        {hour >= 18 && hour < 22 && "Expanding knowledge"}
+        {(hour >= 22 || hour < 9) && "Recharging batteries"}
+      </div>
+      <div className="mt-3 pt-2 border-t border-white/10">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-white/60 text-[10px]">Active Now</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Quote/Inspiration Widget
+export const QuoteWidget: React.FC = () => {
+  const quotes = [
+    { text: "Code is poetry", author: "Clean Code" },
+    { text: "Make it work, make it right, make it fast", author: "Kent Beck" },
+    { text: "Simplicity is the ultimate sophistication", author: "Da Vinci" },
+    { text: "First, solve the problem. Then, write the code", author: "John Johnson" },
+    { text: "The best way to predict the future is to invent it", author: "Alan Kay" },
+  ];
+
+  const [currentQuote] = useState(quotes[Math.floor(Math.random() * quotes.length)]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.1 }}
+      className="widget widget-medium bg-gradient-to-br from-indigo-500/20 to-purple-500/20"
+    >
+      <BookOpen className="w-4 h-4 text-purple-300 mb-3" />
+      <div className="text-white/90 text-sm italic leading-relaxed mb-2">
+        "{currentQuote.text}"
+      </div>
+      <div className="text-white/50 text-xs">
+        — {currentQuote.author}
+      </div>
+    </motion.div>
+  );
+};
+
+// Performance Stats Widget
+export const PerformanceWidget: React.FC = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.2 }}
+      className="widget widget-small"
+    >
+      <div className="flex items-center gap-2 mb-3">
+        <TrendingUp className="w-4 h-4 text-green-400" />
+        <span className="text-white/80 text-xs font-semibold">PRODUCTIVITY</span>
+      </div>
+      <div className="space-y-2">
+        <div>
+          <div className="flex justify-between text-xs mb-1">
+            <span className="text-white/70">This Week</span>
+            <span className="text-green-400 font-semibold">+23%</span>
+          </div>
+          <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "76%" }}
+              transition={{ delay: 1.5, duration: 0.8 }}
+              className="h-full bg-gradient-to-r from-green-400 to-emerald-400 rounded-full"
+            />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-2 mt-3">
+          <div className="text-center">
+            <div className="text-xl font-semibold text-blue-400">32h</div>
+            <div className="text-[10px] text-white/50">Coding</div>
+          </div>
+          <div className="text-center">
+            <div className="text-xl font-semibold text-purple-400">8h</div>
+            <div className="text-[10px] text-white/50">Learning</div>
+          </div>
         </div>
       </div>
     </motion.div>
