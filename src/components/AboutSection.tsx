@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import MacWindow from './MacWindow';
 import { GraduationCap, Award, Users } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
@@ -17,89 +16,84 @@ const AboutSection: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="py-24 px-6">
-      <div className="container mx-auto max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="section-title text-center"
-        >
-          About Me
-        </motion.h2>
+    <div className="space-y-6">
+      <h2 className="section-title">About Me</h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <MacWindow title="education.txt" className="h-fit">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="p-3 rounded-xl gradient-bg">
-                <GraduationCap className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg">Dayananda Sagar College of Engineering</h3>
-                <p className="text-muted-foreground">B.Sc in Computer Science</p>
-                <p className="text-sm text-muted-foreground/70">Nov 2022 – Present • Bangalore</p>
-              </div>
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Education */}
+        <div className="glass-panel p-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500">
+              <GraduationCap className="w-5 h-5 text-white" />
             </div>
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-secondary">
-                <GraduationCap className="w-6 h-6 text-secondary-foreground" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg">Bishop Cotton Boys' School</h3>
-                <p className="text-muted-foreground">ICSE and ISC</p>
-                <p className="text-sm text-muted-foreground/70">2015 – 2022 • Bangalore</p>
-              </div>
+            <h3 className="text-white font-semibold">Education</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="border-l-2 border-blue-500/50 pl-4">
+              <h4 className="font-medium text-white">Dayananda Sagar College of Engineering</h4>
+              <p className="text-white/60 text-sm">B.Sc in Computer Science</p>
+              <p className="text-white/40 text-xs mt-1">Nov 2022 – Present • Bangalore</p>
             </div>
-          </MacWindow>
+            <div className="border-l-2 border-purple-500/50 pl-4">
+              <h4 className="font-medium text-white">Bishop Cotton Boys' School</h4>
+              <p className="text-white/60 text-sm">ICSE and ISC</p>
+              <p className="text-white/40 text-xs mt-1">2015 – 2022 • Bangalore</p>
+            </div>
+          </div>
+        </div>
 
-          <div className="space-y-8">
-            <MacWindow title="achievements.md">
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold">Achievements</h3>
-              </div>
-              <ul className="space-y-3">
-                {achievements.map((achievement, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <span className="w-2 h-2 rounded-full gradient-bg flex-shrink-0" />
-                    <span className="text-muted-foreground">{achievement}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </MacWindow>
+        {/* Achievements */}
+        <div className="glass-panel p-5">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500">
+              <Award className="w-5 h-5 text-white" />
+            </div>
+            <h3 className="text-white font-semibold">Achievements</h3>
+          </div>
+          
+          <ul className="space-y-2.5">
+            {achievements.map((achievement, index) => (
+              <motion.li
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-3"
+              >
+                <span className="w-2 h-2 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex-shrink-0" />
+                <span className="text-white/70 text-sm">{achievement}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
 
-            <MacWindow title="leadership.json">
-              <div className="flex items-center gap-3 mb-4">
-                <Users className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold">Leadership</h3>
-              </div>
-              <div className="space-y-3">
-                {leadership.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center justify-between p-3 rounded-xl bg-secondary/50"
-                  >
-                    <span className="font-medium">{item.role}</span>
-                    <span className="text-sm text-muted-foreground">{item.org}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </MacWindow>
+        {/* Leadership */}
+        <div className="glass-panel p-5 md:col-span-2">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-green-500 to-teal-500">
+              <Users className="w-5 h-5 text-white" />
+            </div>
+            <h3 className="text-white font-semibold">Leadership</h3>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-3">
+            {leadership.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/10"
+              >
+                <span className="font-medium text-white text-sm">{item.role}</span>
+                <span className="text-xs text-white/50">{item.org}</span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

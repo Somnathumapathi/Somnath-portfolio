@@ -1,84 +1,103 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Home, User, Briefcase, Code, FolderOpen, Mail, Github, Linkedin } from 'lucide-react';
+import { 
+  Compass, 
+  AppWindow, 
+  MessageCircle, 
+  Mail, 
+  Calendar,
+  Image,
+  Music,
+  Settings,
+  FolderOpen,
+  FileText,
+  User,
+  Code,
+  Terminal,
+  Chrome,
+  Github,
+  Linkedin
+} from 'lucide-react';
 
 interface DockItem {
   icon: React.ElementType;
   label: string;
-  href: string;
-  external?: boolean;
+  color: string;
+  onClick?: () => void;
 }
 
-const dockItems: DockItem[] = [
-  { icon: Home, label: 'Home', href: '#home' },
-  { icon: User, label: 'About', href: '#about' },
-  { icon: Briefcase, label: 'Experience', href: '#experience' },
-  { icon: FolderOpen, label: 'Projects', href: '#projects' },
-  { icon: Code, label: 'Skills', href: '#skills' },
-  { icon: Mail, label: 'Contact', href: '#contact' },
-];
+interface DockProps {
+  onOpenWindow: (windowId: string) => void;
+}
 
-const externalLinks: DockItem[] = [
-  { icon: Github, label: 'GitHub', href: 'https://github.com', external: true },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com', external: true },
-];
+const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
+  const mainApps: DockItem[] = [
+    { icon: Compass, label: 'Finder', color: 'from-blue-400 to-blue-600', onClick: () => onOpenWindow('about') },
+    { icon: AppWindow, label: 'Launchpad', color: 'from-gray-600 to-gray-800' },
+    { icon: MessageCircle, label: 'Messages', color: 'from-green-400 to-green-600' },
+    { icon: Mail, label: 'Mail', color: 'from-blue-500 to-blue-700', onClick: () => onOpenWindow('contact') },
+    { icon: Calendar, label: 'Calendar', color: 'from-red-400 to-red-600' },
+    { icon: Image, label: 'Photos', color: 'from-purple-400 via-pink-500 to-orange-400' },
+    { icon: Music, label: 'Music', color: 'from-red-500 to-pink-600' },
+  ];
 
-const Dock: React.FC = () => {
-  const handleClick = (href: string, external?: boolean) => {
-    if (external) {
-      window.open(href, '_blank');
-    } else {
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const portfolioApps: DockItem[] = [
+    { icon: User, label: 'About Me', color: 'from-cyan-400 to-blue-500', onClick: () => onOpenWindow('about') },
+    { icon: FolderOpen, label: 'Projects', color: 'from-blue-400 to-indigo-500', onClick: () => onOpenWindow('projects') },
+    { icon: Code, label: 'Skills', color: 'from-orange-400 to-red-500', onClick: () => onOpenWindow('skills') },
+    { icon: FileText, label: 'Experience', color: 'from-yellow-400 to-orange-500', onClick: () => onOpenWindow('experience') },
+    { icon: Terminal, label: 'Terminal', color: 'from-gray-700 to-gray-900' },
+  ];
+
+  const externalApps: DockItem[] = [
+    { icon: Chrome, label: 'Chrome', color: 'from-red-500 via-yellow-500 to-green-500' },
+    { icon: Github, label: 'GitHub', color: 'from-gray-700 to-gray-900' },
+    { icon: Linkedin, label: 'LinkedIn', color: 'from-blue-500 to-blue-700' },
+    { icon: Settings, label: 'Settings', color: 'from-gray-400 to-gray-600' },
+  ];
+
+  const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) => (
+    <motion.button
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.05 * index + 0.3, duration: 0.3 }}
+      whileHover={{ y: -12, scale: 1.15 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={item.onClick}
+      className="dock-icon-btn group relative"
+      aria-label={item.label}
+    >
+      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
+        <item.icon className="w-6 h-6 text-white" />
+      </div>
+      <span className="dock-tooltip">
+        {item.label}
+      </span>
+    </motion.button>
+  );
 
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
+      transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+      className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[100]"
     >
-      <div className="glass-dock px-4 py-2 flex items-center gap-2">
-        {dockItems.map((item, index) => (
-          <motion.button
-            key={item.label}
-            onClick={() => handleClick(item.href, item.external)}
-            whileHover={{ scale: 1.2, y: -8 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index + 0.6, duration: 0.3 }}
-            className="dock-item group relative"
-            aria-label={item.label}
-          >
-            <item.icon className="w-6 h-6 text-foreground/80 group-hover:text-primary transition-colors" />
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-foreground text-background text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              {item.label}
-            </span>
-          </motion.button>
+      <div className="dock-container px-2 py-1.5 flex items-end gap-1">
+        {mainApps.map((item, index) => (
+          <DockIcon key={item.label} item={item} index={index} />
         ))}
         
-        <div className="w-px h-8 bg-border/50 mx-2" />
+        <div className="dock-divider" />
         
-        {externalLinks.map((item, index) => (
-          <motion.button
-            key={item.label}
-            onClick={() => handleClick(item.href, item.external)}
-            whileHover={{ scale: 1.2, y: -8 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * (index + dockItems.length) + 0.6, duration: 0.3 }}
-            className="dock-item group relative"
-            aria-label={item.label}
-          >
-            <item.icon className="w-6 h-6 text-foreground/80 group-hover:text-primary transition-colors" />
-            <span className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-foreground text-background text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-              {item.label}
-            </span>
-          </motion.button>
+        {portfolioApps.map((item, index) => (
+          <DockIcon key={item.label} item={item} index={index + mainApps.length} />
+        ))}
+        
+        <div className="dock-divider" />
+        
+        {externalApps.map((item, index) => (
+          <DockIcon key={item.label} item={item} index={index + mainApps.length + portfolioApps.length} />
         ))}
       </div>
     </motion.div>

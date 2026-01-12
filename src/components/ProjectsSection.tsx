@@ -64,58 +64,48 @@ const projects: Project[] = [
 
 const ProjectsSection: React.FC = () => {
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="container mx-auto max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="section-title text-center"
-        >
-          Featured Projects
-        </motion.h2>
+    <div className="space-y-6">
+      <h2 className="section-title">Featured Projects</h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="project-card group"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${project.gradient}`}>
-                  <project.icon className="w-6 h-6 text-white" />
-                </div>
-                <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                    <Github className="w-5 h-5" />
-                  </button>
-                  <button className="p-2 rounded-lg hover:bg-secondary transition-colors">
-                    <ExternalLink className="w-5 h-5" />
-                  </button>
-                </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            className="project-card group"
+          >
+            <div className="flex items-start justify-between mb-4">
+              <div className={`p-3 rounded-xl bg-gradient-to-br ${project.gradient}`}>
+                <project.icon className="w-5 h-5 text-white" />
               </div>
+              <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                  <Github className="w-4 h-4 text-white/60" />
+                </button>
+                <button className="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                  <ExternalLink className="w-4 h-4 text-white/60" />
+                </button>
+              </div>
+            </div>
 
-              <h3 className="text-xl font-semibold mb-2">{project.name}</h3>
-              <p className="text-sm text-gradient font-medium mb-3">{project.tech}</p>
-              <p className="text-muted-foreground mb-4">{project.description}</p>
+            <h3 className="text-lg font-semibold text-white mb-1">{project.name}</h3>
+            <p className="text-sm text-blue-400 font-medium mb-2">{project.tech}</p>
+            <p className="text-white/60 text-sm mb-4">{project.description}</p>
 
-              <ul className="space-y-2">
-                {project.highlights.map((highlight, hIndex) => (
-                  <li key={hIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+            <ul className="space-y-1.5">
+              {project.highlights.map((highlight, hIndex) => (
+                <li key={hIndex} className="flex items-start gap-2 text-xs text-white/50">
+                  <span className="w-1 h-1 rounded-full bg-blue-400 mt-1.5 flex-shrink-0" />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
