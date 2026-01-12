@@ -41,7 +41,7 @@ const Index = () => {
 
   return (
     <div 
-      className="min-h-screen w-full overflow-hidden relative"
+      className="min-h-screen w-full relative"
       style={{
         backgroundImage: `url(${wallpaper})`,
         backgroundSize: 'cover',
@@ -58,8 +58,10 @@ const Index = () => {
           <WeatherWidget />
         </div>
         <WorldClockWidget />
-        <ProfileWidget onClick={() => openWindow('about')} />
-        <SkillsWidget />
+        <div className="flex gap-3">
+          <ProfileWidget onClick={() => openWindow('about')} />
+          <SkillsWidget />
+        </div>
         <ExperienceWidget />
       </div>
 

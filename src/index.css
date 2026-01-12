@@ -162,10 +162,11 @@
   .app-window {
     @apply fixed rounded-xl overflow-hidden flex flex-col;
     top: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 1000px;
+    left: 1rem;
+    right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: min(900px, calc(100vw - 2rem));
     height: calc(100vh - 160px);
     background: rgba(30, 30, 30, 0.85);
     backdrop-filter: blur(40px) saturate(180%);
@@ -177,10 +178,26 @@
     z-index: 50;
   }
 
+  .app-window.is-maximized {
+    top: 28px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: calc(100vh - 28px);
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 0;
+  }
+
   .window-titlebar {
-    @apply relative flex items-center justify-between px-4 py-2.5;
+    @apply relative flex items-center justify-between px-4 py-2.5 select-none;
     background: rgba(50, 50, 50, 0.6);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: grab;
+  }
+
+  .window-titlebar:active {
+    cursor: grabbing;
   }
 
   .window-toolbar {
