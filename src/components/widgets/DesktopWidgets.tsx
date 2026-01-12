@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen } from 'lucide-react';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight } from 'lucide-react';
+import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
+import {FaAws} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
 
 // Calendar Widget
@@ -146,12 +148,14 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
 };
 
 // Skills Stats Widget
-export const SkillsWidget: React.FC = () => {
+export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
   const skills = [
-    { name: 'Flutter', level: 90 },
-    { name: 'Go', level: 85 },
-    { name: 'NextJS', level: 88 },
-    { name: 'Python', level: 80 },
+    { name: 'Flutter', icon: SiFlutter, color: 'text-blue-400' },
+    { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
+    { name: 'NextJS', icon: SiNextdotjs, color: 'text-white' },
+    { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
+    { name: 'AWS', icon: FaAws, color: 'text-orange-400' },
+    { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
   ];
 
   return (
@@ -159,26 +163,48 @@ export const SkillsWidget: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7 }}
-      className="widget widget-medium"
+      className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-all group"
+      onClick={onClick}
     >
-      <div className="text-white/80 text-xs font-medium mb-3">TOP SKILLS</div>
-      <div className="space-y-2">
-        {skills.map((skill) => (
-          <div key={skill.name}>
-            <div className="flex justify-between text-xs mb-1">
-              <span className="text-white/80">{skill.name}</span>
-              <span className="text-white/50">{skill.level}%</span>
-            </div>
-            <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${skill.level}%` }}
-                transition={{ delay: 1, duration: 0.8 }}
-                className="h-full bg-gradient-to-r from-blue-400 to-purple-400 rounded-full"
-              />
-            </div>
-          </div>
-        ))}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-4 h-4 text-purple-400" />
+          <div className="text-white/90 text-sm font-semibold">TECH STACK</div>
+        </div>
+        <motion.div 
+          className="flex items-center gap-1 text-white/50 text-xs group-hover:text-white/80 transition-colors"
+          whileHover={{ x: 3 }}
+        >
+          <span>View All</span>
+          <ArrowRight className="w-3 h-3" />
+        </motion.div>
+      </div>
+      
+      <div className="grid grid-cols-3 gap-2 mb-3">
+        {skills.slice(0, 6).map((skill, index) => {
+          const IconComponent = skill.icon;
+          return (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 + index * 0.1 }}
+              className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all border border-white/10 group-hover:border-white/20"
+            >
+              <IconComponent className={`w-7 h-7 mb-1.5 ${skill.color}`} />
+              <div className="text-xs font-medium text-white/80">
+                {skill.name}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+      
+      <div className="pt-2 border-t border-white/10">
+        <div className="text-white/60 text-xs flex items-center gap-1">
+          <span>+10 more technologies</span>
+          <span className="text-purple-400">→</span>
+        </div>
       </div>
     </motion.div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, Users } from 'lucide-react';
+import { GraduationCap, Award, Users, Code2, Sparkles } from 'lucide-react';
+import somnathPhoto from '@/assets/somnath-photo.jpg';
 
 const AboutSection: React.FC = () => {
   const achievements = [
@@ -18,6 +19,43 @@ const AboutSection: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="section-title">About Me</h2>
+
+      {/* Hero Introduction */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="glass-panel p-6 mb-6"
+      >
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          <div className="w-32 h-32 rounded-2xl overflow-hidden ring-4 ring-white/20 flex-shrink-0">
+            <img 
+              src={somnathPhoto} 
+              alt="Somnath Umapathi" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-3">
+              <h3 className="text-2xl font-bold text-white">Somnath Umapathi</h3>
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+            </div>
+            <div className="flex items-center gap-2 mb-4">
+              <Code2 className="w-4 h-4 text-blue-400" />
+              <p className="text-blue-400 font-medium">Full Stack Developer & Problem Solver</p>
+            </div>
+            <p className="text-white/80 leading-relaxed mb-4">
+              Passionate full-stack developer with 2+ years of experience building scalable applications. 
+              I specialize in Flutter, Go, Python, and modern web technologies. Currently working on 
+              cutting-edge projects involving AI integration, real-time systems, and cross-platform development.
+            </p>
+            <p className="text-white/70 leading-relaxed">
+              As a hackathon enthusiast and team leader, I've led multiple successful projects from concept 
+              to deployment. I thrive in collaborative environments and enjoy mentoring fellow developers. 
+              Always learning, always building, always improving.
+            </p>
+          </div>
+        </div>
+      </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {/* Education */}

@@ -7,7 +7,7 @@ const ContactSection: React.FC = () => {
     { icon: Mail, label: "Email", value: "somnathumapathi7@gmail.com", href: "mailto:somnathumapathi7@gmail.com" },
     { icon: Phone, label: "Phone", value: "+91 9449320808", href: "tel:+919449320808" },
     { icon: Linkedin, label: "LinkedIn", value: "Connect on LinkedIn", href: "https://linkedin.com" },
-    { icon: Github, label: "GitHub", value: "View GitHub", href: "https://github.com" },
+    { icon: Github, label: "GitHub", value: "View GitHub", href: "https://github.com/Somnathumapathi" },
   ];
 
   return (

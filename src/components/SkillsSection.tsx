@@ -10,22 +10,27 @@ interface SkillCategory {
 const skillCategories: SkillCategory[] = [
   {
     title: "Languages",
-    skills: ["Dart", "Python", "JavaScript", "TypeScript", "Go", "Solidity", "PHP"],
+    skills: ["Dart", "Python", "JavaScript", "TypeScript", "Go", "Java", "Solidity", "PHP"],
     color: "from-blue-500 to-cyan-500",
   },
   {
     title: "Frameworks",
-    skills: ["Flutter", "FastAPI", "Next.js", "Express.js", "Fiber", "Gin", "Laravel"],
+    skills: ["Flutter", "FastAPI", "Flask", "Next.js", "Express.js", "Fiber", "Gin", "Laravel"],
     color: "from-purple-500 to-pink-500",
   },
   {
     title: "Developer Tools",
-    skills: ["VS Code", "Android Studio", "GitHub", "AWS", "Docker", "Kubernetes", "WordPress"],
+    skills: ["VS Code", "Android Studio", "GitHub", "Docker", "Kubernetes", "WordPress"],
     color: "from-orange-500 to-red-500",
   },
   {
+    title: "Databases, Cloud and ORMs",
+    skills: ["Firebase", "Supabase", "MongoDB", "SQLAlchemy", "AWS"],
+    color: "from-yellow-500 to-amber-500",
+  },
+  {
     title: "Others",
-    skills: ["OOP", "SOLID Principles", "Cloud", "SQL", "NoSQL", "CI/CD", "Microservices"],
+    skills: ["OOPS", "SOLID Principles", "Cloud", "SQL", "NoSQL", "CI/CD", "Microservices"],
     color: "from-green-500 to-teal-500",
   },
 ];
