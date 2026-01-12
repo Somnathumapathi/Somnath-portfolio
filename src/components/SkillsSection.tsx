@@ -1,68 +1,70 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import MacWindow from './MacWindow';
 
 interface SkillCategory {
   title: string;
   skills: string[];
+  color: string;
 }
 
 const skillCategories: SkillCategory[] = [
   {
     title: "Languages",
     skills: ["Dart", "Python", "JavaScript", "TypeScript", "Go", "Solidity", "PHP"],
+    color: "from-blue-500 to-cyan-500",
   },
   {
     title: "Frameworks",
     skills: ["Flutter", "FastAPI", "Next.js", "Express.js", "Fiber", "Gin", "Laravel"],
+    color: "from-purple-500 to-pink-500",
   },
   {
     title: "Developer Tools",
     skills: ["VS Code", "Android Studio", "GitHub", "AWS", "Docker", "Kubernetes", "WordPress"],
+    color: "from-orange-500 to-red-500",
   },
   {
     title: "Others",
     skills: ["OOP", "SOLID Principles", "Cloud", "SQL", "NoSQL", "CI/CD", "Microservices"],
+    color: "from-green-500 to-teal-500",
   },
 ];
 
 const SkillsSection: React.FC = () => {
   return (
-    <section id="skills" className="py-24 px-6">
-      <div className="container mx-auto max-w-6xl">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="section-title text-center"
-        >
-          Technical Skills
-        </motion.h2>
+    <div className="space-y-6">
+      <h2 className="section-title">Technical Skills</h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {skillCategories.map((category, catIndex) => (
-            <MacWindow key={category.title} title={`${category.title.toLowerCase()}.config`}>
-              <h3 className="text-lg font-semibold mb-4 text-gradient">{category.title}</h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: catIndex * 0.1 + skillIndex * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                    className="skill-tag"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </MacWindow>
-          ))}
-        </div>
+      <div className="grid md:grid-cols-2 gap-4">
+        {skillCategories.map((category, catIndex) => (
+          <motion.div
+            key={category.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: catIndex * 0.1 }}
+            className="glass-panel p-5"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${category.color}`} />
+              <h3 className="text-white font-semibold">{category.title}</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {category.skills.map((skill, skillIndex) => (
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: catIndex * 0.1 + skillIndex * 0.03 }}
+                  className="skill-tag"
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 
