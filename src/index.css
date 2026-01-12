@@ -107,6 +107,102 @@
 }
 
 @layer components {
+  /* Menu Bar */
+  .menu-bar {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border-bottom: 1px solid hsl(var(--glass-border));
+  }
+
+  /* Desktop Window */
+  .desktop-window {
+    @apply fixed rounded-xl overflow-hidden flex flex-col;
+    top: 40px;
+    left: 16px;
+    right: 16px;
+    bottom: 90px;
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid hsl(var(--glass-border));
+    box-shadow: 
+      0 25px 80px hsl(var(--glass-shadow)),
+      0 10px 30px hsl(0 0% 0% / 0.1),
+      inset 0 1px 0 hsl(0 0% 100% / 0.1);
+  }
+
+  .desktop-window.maximized {
+    top: 35px;
+    left: 8px;
+    right: 8px;
+    bottom: 80px;
+  }
+
+  .window-titlebar {
+    @apply relative flex items-center justify-between px-4 py-2;
+    background: hsl(var(--glass-bg));
+    border-bottom: 1px solid hsl(var(--glass-border));
+  }
+
+  .window-toolbar {
+    @apply flex items-center justify-between px-4 py-2;
+    background: hsl(0 0% 100% / 0.3);
+    border-bottom: 1px solid hsl(var(--glass-border));
+  }
+
+  .dark .window-toolbar {
+    background: hsl(0 0% 0% / 0.2);
+  }
+
+  .window-content {
+    @apply flex-1 overflow-y-auto overflow-x-hidden;
+  }
+
+  /* Traffic light buttons */
+  .traffic-light {
+    @apply relative w-3 h-3 rounded-full flex items-center justify-center transition-all duration-200;
+  }
+
+  .traffic-light-icon {
+    @apply opacity-0 text-[10px] font-bold leading-none transition-opacity;
+    color: hsl(0 0% 0% / 0.5);
+  }
+
+  .traffic-light:hover .traffic-light-icon,
+  .window-titlebar:hover .traffic-light-icon {
+    @apply opacity-100;
+  }
+
+  .traffic-light-close {
+    background: hsl(0 84% 60%);
+  }
+
+  .traffic-light-close:hover {
+    background: hsl(0 84% 55%);
+  }
+
+  .traffic-light-minimize {
+    background: hsl(45 93% 58%);
+  }
+
+  .traffic-light-minimize:hover {
+    background: hsl(45 93% 50%);
+  }
+
+  .traffic-light-maximize {
+    background: hsl(142 71% 45%);
+  }
+
+  .traffic-light-maximize:hover {
+    background: hsl(142 71% 40%);
+  }
+
+  /* Desktop Icon */
+  .desktop-icon {
+    @apply flex flex-col items-center cursor-pointer select-none;
+  }
+
   .glass-panel {
     @apply relative overflow-hidden rounded-2xl;
     background: hsl(var(--glass-bg));
@@ -193,6 +289,24 @@
     @apply absolute top-0 left-0 w-1 h-full rounded-full;
     content: '';
     background: var(--text-gradient);
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
   }
 }
 
