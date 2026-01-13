@@ -8,7 +8,7 @@ import {
   CalendarWidget,
   WeatherWidget,
   WorldClockWidget,
-  AchievementsWidget,
+  ProfileWidget,
   SkillsWidget,
   ExperienceWidget,
   GitHubWidget,
@@ -63,7 +63,7 @@ const Index = () => {
         </div>
         <WorldClockWidget /> */}
         <div className="flex gap-4">
-          <AchievementsWidget onClick={() => openWindow('about')} />
+          <ProfileWidget onClick={() => openWindow('about')} />
           <SkillsWidget onClick={() => openWindow('skills')} />
         </div>
         <ExperienceWidget onClick={() => openWindow('experience')} />
