@@ -10,7 +10,7 @@ import {
   CalendarWidget,
   WeatherWidget,
   WorldClockWidget,
-  ProfileWidget,
+  AchievementsWidget,
   SkillsWidget,
   ExperienceWidget,
   GitHubWidget,
@@ -66,7 +66,7 @@ const Index = () => {
       {/* Desktop Widgets */}
       <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
         <div className="flex gap-4">
-          <ProfileWidget onClick={() => openWindow('about')} />
+          <AchievementsWidget onClick={() => openWindow('about')} />
           <SkillsWidget onClick={() => openWindow('skills')} />
         </div>
         <ExperienceWidget onClick={() => openWindow('experience')} />
