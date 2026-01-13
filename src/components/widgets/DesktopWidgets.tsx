@@ -237,120 +237,24 @@ export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =>
 };
 
 // Experience Counter Widget
-import neosapienLogo from '@/assets/neosapien.png';
-import wrcLogo from '@/assets/wrc.png';
-import fitchoiceworldLogo from '@/assets/fitchoiceworld.png';
-import zyluLogo from '@/assets/zylu.png';
-
-export const ExperienceWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-  const companies = [
-    { name: 'Neosapien', logo: neosapienLogo, role: 'Full Stack Dev', current: true },
-    { name: 'WRC', logo: wrcLogo, role: 'Team Lead', current: true },
-    { name: 'Fit Choice', logo: fitchoiceworldLogo, role: 'Freelance', current: true },
-    { name: 'Zylu', logo: zyluLogo, role: 'Product Eng', current: false },
-  ];
-
-  const stats = [
-    { value: '3+', label: 'Years Exp', color: 'from-blue-400 to-cyan-400' },
-    { value: '5+', label: 'Companies', color: 'from-green-400 to-emerald-400' },
-    { value: '15+', label: 'Projects', color: 'from-purple-400 to-pink-400' },
-  ];
-
+export const ExperienceWidget: React.FC = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.8 }}
-      className="widget widget-large cursor-pointer hover:scale-[1.02] transition-all group"
-      onClick={onClick}
+      className="widget widget-small"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-            <TrendingUp className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <div className="text-white font-semibold text-sm">EXPERIENCE</div>
-            <div className="text-white/50 text-[10px]">Career Journey</div>
-          </div>
+      <div className="text-5xl font-light text-white">2+</div>
+      <div className="text-white/60 text-sm mt-1">Years Experience</div>
+      <div className="flex gap-2 mt-3">
+        <div className="text-center">
+          <div className="text-lg font-semibold text-green-400">5+</div>
+          <div className="text-[10px] text-white/50">Projects</div>
         </div>
-        <motion.div 
-          className="flex items-center gap-1 text-white/50 text-xs group-hover:text-white/80 transition-colors"
-          whileHover={{ x: 3 }}
-        >
-          <span>Details</span>
-          <ArrowRight className="w-3 h-3" />
-        </motion.div>
-      </div>
-
-      {/* Stats Row */}
-      <div className="grid grid-cols-3 gap-2 mb-4">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.9 + index * 0.1 }}
-            className="relative p-2.5 rounded-xl bg-white/5 border border-white/10 text-center overflow-hidden"
-          >
-            <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-10`} />
-            <div className={`text-xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
-              {stat.value}
-            </div>
-            <div className="text-[10px] text-white/60">{stat.label}</div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Companies Timeline */}
-      <div className="space-y-2 mb-3">
-        <div className="text-white/50 text-[10px] font-medium uppercase tracking-wider">Recent Positions</div>
-        <div className="space-y-1.5">
-          {companies.map((company, index) => (
-            <motion.div
-              key={company.name}
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.0 + index * 0.1 }}
-              className="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all border border-white/5"
-            >
-              <div className="w-7 h-7 rounded-md overflow-hidden bg-white/10 flex-shrink-0 p-0.5">
-                <img 
-                  src={company.logo} 
-                  alt={company.name} 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-white text-xs font-medium truncate">{company.name}</div>
-                <div className="text-white/50 text-[10px] truncate">{company.role}</div>
-              </div>
-              {company.current && (
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-green-500/20 border border-green-500/30">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-green-400 text-[9px] font-medium">Active</span>
-                </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Skills Highlight */}
-      <div className="pt-3 border-t border-white/10">
-        <div className="flex flex-wrap gap-1">
-          {['Go', 'Python', 'Flutter', 'AWS', 'Docker'].map((skill) => (
-            <span 
-              key={skill}
-              className="px-2 py-0.5 rounded-full bg-white/10 text-white/70 text-[10px] border border-white/10"
-            >
-              {skill}
-            </span>
-          ))}
-          <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] border border-purple-500/30">
-            +10 more
-          </span>
+        <div className="text-center">
+          <div className="text-lg font-semibold text-blue-400">10+</div>
+          <div className="text-[10px] text-white/50">Tech Stack</div>
         </div>
       </div>
     </motion.div>
