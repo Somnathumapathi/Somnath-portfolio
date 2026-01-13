@@ -4,6 +4,8 @@ import wallpaper from '@/assets/wallpaper.jpg';
 import MenuBar from '@/components/MenuBar';
 import Dock from '@/components/Dock';
 import AppWindow from '@/components/AppWindow';
+import MobileLayout from '@/components/MobileLayout';
+import { useIsMobile } from '@/hooks/use-mobile';
 import {
   CalendarWidget,
   WeatherWidget,
@@ -25,6 +27,7 @@ import ContactSection from '@/components/ContactSection';
 type WindowId = 'about' | 'experience' | 'projects' | 'skills' | 'contact' | null;
 
 const Index = () => {
+  const isMobile = useIsMobile();
   const [activeWindow, setActiveWindow] = useState<WindowId>(null);
 
   const openWindow = (id: string) => {
@@ -43,6 +46,11 @@ const Index = () => {
     contact: 'Contact - Mail',
   };
 
+  // Show mobile layout on smaller screens
+  if (isMobile) {
+    return <MobileLayout />;
+  }
+
   return (
     <div 
       className="min-h-screen w-full relative"
@@ -57,11 +65,6 @@ const Index = () => {
       
       {/* Desktop Widgets */}
       <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
-        {/* <div className="flex gap-3">
-          <CalendarWidget />
-          <WeatherWidget />
-        </div>
-        <WorldClockWidget /> */}
         <div className="flex gap-4">
           <ProfileWidget onClick={() => openWindow('about')} />
           <SkillsWidget onClick={() => openWindow('skills')} />
