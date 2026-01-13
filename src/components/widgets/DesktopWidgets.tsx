@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download } from 'lucide-react';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2 } from 'lucide-react';
 import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
 import {FaAws} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
 import resume from '@/assets/Somnath_resume.pdf';
+import neosapienLogo from '@/assets/neosapien.png';
+import wrcLogo from '@/assets/wrc.png';
+import fitchoiceworldLogo from '@/assets/fitchoiceworld.png';
+import yogaclanLogo from '@/assets/yogaclan.jpg';
+import zyluLogo from '@/assets/zylu.png';
 
 // Calendar Widget
 export const CalendarWidget: React.FC = () => {
@@ -108,14 +113,17 @@ export const WorldClockWidget: React.FC = () => {
   );
 };
 
-// Achievements Widget (Hackathon Wins)
-export const AchievementsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
-  const achievements = [
-    { place: '1st', event: 'Appify 2024', venue: 'BMS College', icon: '🥇' },
-    { place: '1st', event: 'HackOasis 2024', venue: 'Hackathon', icon: '🥇' },
-    { place: 'Special', event: 'GoFr.dev', venue: 'Hackathon', icon: '⭐' },
-    { place: '3rd', event: 'HackRefine 2024', venue: 'Hackathon', icon: '🥉' },
-  ];
+// Profile Widget (custom for portfolio)
+export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  const handleResumeDownload = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const link = document.createElement('a');
+    link.href = resume;
+    link.download = 'Somnath_Umapathi_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <motion.div
@@ -125,49 +133,38 @@ export const AchievementsWidget: React.FC<{ onClick?: () => void }> = ({ onClick
       className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
       onClick={onClick}
     >
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center">
-            <span className="text-lg">🏆</span>
-          </div>
-          <div>
-            <div className="text-white font-semibold text-sm">ACHIEVEMENTS</div>
-            <div className="text-white/50 text-[10px]">Hackathon Wins</div>
-          </div>
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-white/20">
+          <img 
+            src={somnathPhoto} 
+            alt="Somnath" 
+            className="w-full h-full object-cover"
+          />
         </div>
-        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/30">
-          <span className="text-yellow-400 text-xs font-bold">4</span>
-          <span className="text-yellow-400/80 text-[10px]">wins</span>
+        <div>
+          <div className="text-white font-semibold text-base">Somnath Umapathi</div>
+          <div className="text-white/70 text-xs">Full Stack Developer</div>
         </div>
       </div>
-      
-      <div className="space-y-2">
-        {achievements.map((achievement, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 + index * 0.1 }}
-            className="flex items-center gap-2 p-2 rounded-lg bg-white/5 hover:bg-white/10 transition-all border border-white/5"
-          >
-            <span className="text-lg">{achievement.icon}</span>
-            <div className="flex-1 min-w-0">
-              <div className="text-white text-xs font-medium truncate">{achievement.event}</div>
-              <div className="text-white/50 text-[10px] truncate">{achievement.venue}</div>
-            </div>
-            <div className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-              achievement.place === '1st' ? 'bg-yellow-500/20 text-yellow-400' :
-              achievement.place === 'Special' ? 'bg-purple-500/20 text-purple-400' :
-              'bg-orange-500/20 text-orange-400'
-            }`}>
-              {achievement.place}
-            </div>
-          </motion.div>
-        ))}
+      <div className="flex items-center gap-1 text-white/50 text-xs mb-2">
+        <MapPin className="w-3 h-3" />
+        <span>Bangalore, India</span>
       </div>
-      
-      <div className="mt-3 pt-2 border-t border-white/10">
-        <div className="text-white/60 text-xs text-center">🚀 Click to view full portfolio</div>
+      <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-1 text-green-400 text-xs">
+          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          <span>Available for work</span>
+        </div>
+      </div>
+      <div className="pt-2 border-t border-white/10 space-y-2">
+        <button
+          onClick={handleResumeDownload}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all text-white text-xs font-medium"
+        >
+          <Download className="w-3.5 h-3.5" />
+          <span>Download Resume</span>
+        </button>
+        <div className="text-white/60 text-xs text-center">🚀 Click card to view portfolio</div>
       </div>
     </motion.div>
   );
@@ -236,25 +233,294 @@ export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =>
   );
 };
 
-// Experience Counter Widget
-export const ExperienceWidget: React.FC = () => {
+// Projects Widget
+export const ProjectsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  const featuredProjects = [
+    {
+      name: 'SentinelAI',
+      tagline: 'Cloud security, in real time',
+      icon: Shield,
+      gradient: 'from-blue-500 via-cyan-500 to-indigo-500',
+      chips: ['AWS', 'RAG', 'CloudTrail'],
+    },
+    {
+      name: 'Hookit',
+      tagline: 'Automate workflows + parsing',
+      icon: Webhook,
+      gradient: 'from-purple-500 via-pink-500 to-fuchsia-500',
+      chips: ['Go', 'SaaS', 'Webhooks'],
+    },
+    {
+      name: 'Trash Trace',
+      tagline: 'IoT-enabled waste management',
+      icon: Trash2,
+      gradient: 'from-emerald-500 via-green-500 to-teal-500',
+      chips: ['Flutter', 'IoT', 'Flask'],
+    },
+    {
+      name: 'ChETHFunds',
+      tagline: 'Chit funds on-chain',
+      icon: Link,
+      gradient: 'from-orange-500 via-red-500 to-rose-500',
+      chips: ['Solidity', 'Next.js', 'Viem'],
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % featuredProjects.length);
+    }, 4500);
+    return () => window.clearInterval(id);
+  }, [featuredProjects.length]);
+
+  const active = featuredProjects[activeIndex];
+  const upNext = featuredProjects[(activeIndex + 1) % featuredProjects.length];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.7 }}
+      className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
+      onClick={onClick}
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="text-white/70 text-[11px] font-semibold tracking-wide">PROJECTS</div>
+       
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            {featuredProjects.map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 w-1.5 rounded-full transition-colors ${i === activeIndex ? 'bg-white/90' : 'bg-white/25'}`}
+              />
+            ))}
+          </div>
+         
+        </div>
+      </div>
+
+      <div className="mt-3">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active.name}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className={`relative rounded-2xl p-4 bg-gradient-to-br ${active.gradient} overflow-hidden`}
+          >
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute -right-6 -bottom-6 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
+            <div className="relative">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-9 w-9 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center">
+                    <active.icon className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold leading-none">{active.name}</div>
+                    <div className="text-white/80 text-xs mt-1">{active.tagline}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {active.chips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full bg-white/20 px-2 py-1 text-[10px] text-white/90"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-4 flex items-center justify-between">
+                <div className="text-white/85 text-xs">Tap to open Projects</div>
+                <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
+                  <ArrowRight className="h-4 w-4 text-white" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      <div className="mt-3 pt-3 border-t border-white/10">
+        <div className="text-white/60 text-xs">Up next</div>
+
+        <div className="mt-2">
+          <div className="flex items-center gap-2 rounded-xl bg-white/5 px-2.5 py-2">
+            <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${upNext.gradient} flex items-center justify-center`}>
+              <upNext.icon className="h-4 w-4 text-white" />
+            </div>
+            <div className="min-w-0">
+              <div className="text-white text-xs font-medium truncate">{upNext.name}</div>
+              <div className="text-white/60 text-[11px] truncate">{upNext.tagline}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Experience Widget (Mission Control-style)
+export const ExperienceWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  const startDate = new Date(2022, 6, 1); // Jul 2022
+  const nowDate = new Date();
+  const totalMonths =
+    (nowDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (nowDate.getMonth() - startDate.getMonth());
+  const years = Math.max(0, Math.floor(totalMonths / 12));
+  const yearsLabel = years >= 1 ? `${years}+` : '1+';
+
+  const cards = [
+    {
+      company: 'Neosapien',
+      role: 'Full Stack Developer',
+      period: 'Nov 2025 – Current',
+      location: 'Bangalore',
+      type: 'Full-time',
+      accent: 'from-cyan-500/35 to-indigo-500/30',
+      logo: neosapienLogo,
+    },
+    {
+      company: 'Win Research Centre',
+      role: 'Full Stack • Team Lead',
+      period: 'May 2025 – Current',
+      location: 'Bangalore',
+      type: 'Full-time',
+      accent: 'from-purple-500/35 to-pink-500/25',
+      logo: wrcLogo,
+    },
+    {
+      company: 'Fit Choice World',
+      role: 'Full Stack • Freelance',
+      period: 'Sep 2024 – Current',
+      location: 'Remote',
+      type: 'Freelance',
+      accent: 'from-emerald-500/35 to-teal-500/25',
+      logo: fitchoiceworldLogo,
+    },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.8 }}
-      className="widget widget-small"
+      className="widget widget-2col cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
+      onClick={onClick}
     >
-      <div className="text-5xl font-light text-white">2+</div>
-      <div className="text-white/60 text-sm mt-1">Years Experience</div>
-      <div className="flex gap-2 mt-3">
-        <div className="text-center">
-          <div className="text-lg font-semibold text-green-400">5+</div>
-          <div className="text-[10px] text-white/50">Projects</div>
+      <div className="flex items-start justify-between">
+        <div>
+          <div className="text-white/70 text-[11px] font-semibold tracking-wide">EXPERIENCE</div>
+          {/* <div className="text-white text-sm font-semibold mt-0.5">Mission Control</div> */}
         </div>
-        <div className="text-center">
-          <div className="text-lg font-semibold text-blue-400">10+</div>
-          <div className="text-[10px] text-white/50">Tech Stack</div>
+        <div className="flex items-center gap-1.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-green-400/80" />
+        </div>
+      </div>
+
+      <div className="mt-3 flex gap-4 items-stretch">
+        <div className="w-[168px] rounded-2xl bg-white/5 border border-white/10 p-3 flex flex-col justify-between">
+          <div>
+            <div className="text-white/60 text-[11px]">Total Experience</div>
+            <div className="mt-1 flex items-baseline gap-2">
+              <div className="text-5xl font-light text-white leading-none">{yearsLabel}</div>
+              <div className="text-white/70 text-sm">years</div>
+            </div>
+            <div className="mt-2 text-white/55 text-[11px]">Product engineering • full stack • mobile</div>
+          </div>
+
+          <div className="mt-3 space-y-2">
+            <div className="flex items-center justify-between rounded-xl bg-white/5 px-2.5 py-2">
+              <span className="text-white/60 text-[11px]">Companies</span>
+              <span className="text-white font-semibold text-sm">5</span>
+            </div>
+            <div className="flex items-center justify-between rounded-xl bg-white/5 px-2.5 py-2">
+              <span className="text-white/60 text-[11px]">Projects</span>
+              <span className="text-white font-semibold text-sm">15+</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex-1 relative rounded-2xl border border-white/10 bg-white/5 overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(700px 180px at 20% 40%, rgba(56,189,248,0.10), transparent 55%), radial-gradient(700px 180px at 80% 70%, rgba(168,85,247,0.10), transparent 60%)',
+            }}
+          />
+
+          <div className="absolute inset-0 p-4">
+            <div className="text-white/60 text-[11px]">Open windows</div>
+            <div className="mt-2 relative h-[150px]">
+              {cards.map((c, idx) => {
+                const styles = [
+                  { z: 1, t: 'translate-x-10 translate-y-10 rotate-[2deg]', s: 'scale-[0.96]', o: 'opacity-60' },
+                  { z: 2, t: 'translate-x-5 translate-y-5 rotate-[1deg]', s: 'scale-[0.98]', o: 'opacity-80' },
+                  { z: 3, t: 'translate-x-0 translate-y-0 rotate-0', s: 'scale-100', o: 'opacity-100' },
+                ][idx] ?? { z: 1, t: 'translate-x-0 translate-y-0 rotate-0', s: 'scale-100', o: 'opacity-100' };
+
+                return (
+                  <div
+                    key={c.company}
+                    className={`absolute inset-0 rounded-2xl border border-white/10 bg-gradient-to-br ${c.accent} ${styles.t} ${styles.s} ${styles.o}`}
+                    style={{ zIndex: styles.z }}
+                  >
+                    <div className="h-full w-full rounded-2xl bg-black/25 backdrop-blur p-3">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="h-9 w-9 rounded-xl bg-white/15 border border-white/15 flex items-center justify-center overflow-hidden">
+                            <img src={c.logo} alt={`${c.company} logo`} className="h-6 w-6 object-contain" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-white text-sm font-semibold truncate">{c.company}</div>
+                            <div className="text-white/75 text-[11px] truncate">{c.role}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="rounded-full bg-white/15 px-2 py-1 text-[10px] text-white/85 whitespace-nowrap">{c.type}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-2 flex items-center gap-2 text-white/70 text-[11px]">
+                        <span className="inline-flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {c.period}
+                        </span>
+                        <span className="text-white/35">•</span>
+                        <span className="inline-flex items-center gap-1">
+                          <MapPin className="h-3 w-3" />
+                          {c.location}
+                        </span>
+                      </div>
+
+                      <div className="mt-3 flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-white/75 text-xs">
+                          <Building2 className="h-4 w-4" />
+                          <span>Click to open full timeline</span>
+                        </div>
+                        <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center">
+                          <ArrowRight className="h-4 w-4 text-white/80" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </motion.div>

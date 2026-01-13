@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import wallpaper from '@/assets/wallpaper.jpg';
 import MenuBar from '@/components/MenuBar';
@@ -10,13 +10,15 @@ import {
   CalendarWidget,
   WeatherWidget,
   WorldClockWidget,
-  AchievementsWidget,
+  // AchievementsWidget,
   SkillsWidget,
+  ProjectsWidget,
   ExperienceWidget,
   GitHubWidget,
   ActivityWidget,
   QuoteWidget,
   PerformanceWidget,
+  ProfileWidget,
 } from '@/components/widgets/DesktopWidgets';
 import AboutSection from '@/components/AboutSection';
 import ExperienceSection from '@/components/ExperienceSection';
@@ -29,6 +31,20 @@ type WindowId = 'about' | 'experience' | 'projects' | 'skills' | 'contact' | nul
 const Index = () => {
   const isMobile = useIsMobile();
   const [activeWindow, setActiveWindow] = useState<WindowId>(null);
+  const [showIntroHint, setShowIntroHint] = useState(false);
+
+  useEffect(() => {
+    const key = 'glassmorphic_intro_seen_v1';
+    try {
+      const seen = window.localStorage.getItem(key);
+      if (!seen) {
+        setShowIntroHint(true);
+        window.localStorage.setItem(key, '1');
+      }
+    } catch {
+      setShowIntroHint(true);
+    }
+  }, []);
 
   const openWindow = (id: string) => {
     setActiveWindow(id as WindowId);
@@ -62,22 +78,50 @@ const Index = () => {
     >
       {/* macOS Menu Bar */}
       <MenuBar />
+
+      {/* One-time interaction hint */}
+      <AnimatePresence>
+        {showIntroHint && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-12 left-1/2 -translate-x-1/2 z-[60]"
+          >
+            <div className="rounded-2xl border border-white/15 bg-black/45 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.55)] px-4 py-3 w-[560px]">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="text-white font-semibold text-sm">Quick tip</div>
+                  <div className="text-white/70 text-xs mt-1 leading-relaxed">
+                    Click widgets to open sections. Use the Dock to navigate. The menu bar is decorative—your content opens in windows.
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowIntroHint(false)}
+                  className="shrink-0 rounded-full bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1 text-white/80 text-xs"
+                >
+                  Got it
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Desktop Widgets */}
       <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
-        <div className="flex gap-4">
-          <AchievementsWidget onClick={() => openWindow('about')} />
+        <ExperienceWidget onClick={() => openWindow('experience')} />
+        <div className="flex gap-4 items-stretch">
           <SkillsWidget onClick={() => openWindow('skills')} />
+          <ProjectsWidget onClick={() => openWindow('projects')} />
         </div>
-        <div className="flex gap-4">
-          <ExperienceWidget />
+        {/* <div className="flex gap-4">
           <GitHubWidget />
-        </div>
-        <div className="flex gap-4">
           <ActivityWidget />
-          <PerformanceWidget />
         </div>
-        <QuoteWidget />
+        <PerformanceWidget />
+        <QuoteWidget /> */}
       </div>
 
       {/* About Section - Right Side */}

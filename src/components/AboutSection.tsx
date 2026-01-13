@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, Users, Code2, Sparkles } from 'lucide-react';
+import { GraduationCap, Award, Users, Code2, Sparkles, MapPin, Download, Github, Linkedin } from 'lucide-react';
 import somnathPhoto from '@/assets/somnath-photo.jpg';
+import resumePdf from '@/assets/Somnath_resume.pdf';
 
 const AboutSection: React.FC = () => {
   const achievements = [
@@ -48,11 +49,41 @@ const AboutSection: React.FC = () => {
               I specialize in Flutter, Go, Python, and modern web technologies. Currently working on 
               cutting-edge projects involving AI integration, real-time systems, and cross-platform development.
             </p>
-            <p className="text-white/70 leading-relaxed">
+            <p className="text-white/70 leading-relaxed mb-4">
               As a hackathon enthusiast and team leader, I've led multiple successful projects from concept 
               to deployment. I thrive in collaborative environments and enjoy mentoring fellow developers. 
               Always learning, always building, always improving.
             </p>
+            <div className="flex items-center gap-2 text-sm text-white/60 mb-4">
+              <MapPin className="w-4 h-4" />
+              <span>Bangalore, India</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <a
+                href={resumePdf}
+                download="Somnath_Umapathi_Resume.pdf"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all text-white text-sm font-medium"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume</span>
+              </a>
+              <a 
+                href="https://github.com/somnathumapathi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              >
+                <Github className="w-5 h-5 text-white" />
+              </a>
+              <a 
+                href="https://linkedin.com/in/somnathumapathi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+              >
+                <Linkedin className="w-5 h-5 text-white" />
+              </a>
+            </div>
           </div>
         </div>
       </motion.div>
