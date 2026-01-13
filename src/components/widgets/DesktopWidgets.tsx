@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight } from 'lucide-react';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download } from 'lucide-react';
 import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
 import {FaAws} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
+import resume from '@/assets/Somnath_resume.pdf';
 
 // Calendar Widget
 export const CalendarWidget: React.FC = () => {
@@ -109,6 +110,16 @@ export const WorldClockWidget: React.FC = () => {
 
 // Profile Widget (custom for portfolio)
 export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  const handleResumeDownload = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const link = document.createElement('a');
+    link.href = resume;
+    link.download = 'Somnath_Umapathi_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -140,8 +151,15 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
           <span>Available for work</span>
         </div>
       </div>
-      <div className="pt-2 border-t border-white/10">
-        <div className="text-white/60 text-xs">🚀 Click to view portfolio</div>
+      <div className="pt-2 border-t border-white/10 space-y-2">
+        <button
+          onClick={handleResumeDownload}
+          className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition-all text-white text-xs font-medium"
+        >
+          <Download className="w-3.5 h-3.5" />
+          <span>Download Resume</span>
+        </button>
+        <div className="text-white/60 text-xs text-center">🚀 Click card to view portfolio</div>
       </div>
     </motion.div>
   );
