@@ -66,10 +66,7 @@ const Index = () => {
           <ProfileWidget onClick={() => openWindow('about')} />
           <SkillsWidget onClick={() => openWindow('skills')} />
         </div>
-        <div className="flex gap-4">
-          <ExperienceWidget />
-          <GitHubWidget />
-        </div>
+        <ExperienceWidget onClick={() => openWindow('experience')} />
         <div className="flex gap-4">
           <ActivityWidget />
           <PerformanceWidget />
