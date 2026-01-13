@@ -74,6 +74,22 @@ const Index = () => {
         <QuoteWidget />
       </div>
 
+      {/* About Section - Right Side */}
+      <motion.div 
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="fixed top-10 right-4 z-20 pt-4 w-[600px] max-h-[calc(100vh-120px)] overflow-y-auto"
+        style={{
+          scrollbarWidth: 'thin',
+          scrollbarColor: 'rgba(255,255,255,0.3) transparent'
+        }}
+      >
+        <div className="glass-panel p-6">
+          <AboutSection />
+        </div>
+      </motion.div>
+
       {/* App Windows */}
       <AnimatePresence>
         {activeWindow && (
