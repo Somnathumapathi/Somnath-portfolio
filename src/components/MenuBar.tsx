@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Apple, Wifi, Battery, Search, Volume2, Bluetooth } from 'lucide-react';
+import { Wifi, Battery, Search, Volume2, Bluetooth, HelpCircle } from 'lucide-react';
 import { FaApple } from 'react-icons/fa'
-const MenuBar: React.FC = () => {
+
+type MenuBarProps = {
+  onStartWalkthrough?: () => void;
+};
+
+const MenuBar: React.FC<MenuBarProps> = ({ onStartWalkthrough }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
@@ -39,6 +44,7 @@ const MenuBar: React.FC = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 z-[100] h-7 flex items-center justify-between px-4"
+      data-tour="menubar"
       style={{
         background: 'rgba(30, 30, 30, 0.6)',
         backdropFilter: 'blur(50px) saturate(180%)',
@@ -63,6 +69,16 @@ const MenuBar: React.FC = () => {
       
       {/* Right side - Status icons */}
       <div className="flex items-center gap-3">
+        {onStartWalkthrough && (
+          <button
+            onClick={onStartWalkthrough}
+            className="hover:bg-white/10 rounded px-1.5 py-0.5 transition-colors"
+            aria-label="Start walkthrough"
+            title="Walkthrough"
+          >
+            <HelpCircle className="w-4 h-4 text-white/80" />
+          </button>
+        )}
         <Bluetooth className="w-4 h-4 text-white/80" />
         <Volume2 className="w-4 h-4 text-white/80" />
         <Wifi className="w-4 h-4 text-white/80" />

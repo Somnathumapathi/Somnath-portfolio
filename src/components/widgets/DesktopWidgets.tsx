@@ -171,7 +171,7 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
 };
 
 // Skills Stats Widget
-export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const skills = [
     { name: 'Flutter', icon: SiFlutter, color: 'text-blue-400' },
     { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
@@ -188,6 +188,7 @@ export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =>
       transition={{ delay: 0.7 }}
       className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-all group"
       onClick={onClick}
+      data-tour={dataTour}
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -234,7 +235,7 @@ export const SkillsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =>
 };
 
 // Projects Widget
-export const ProjectsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const featuredProjects = [
     {
       name: 'SentinelAI',
@@ -285,6 +286,7 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) 
       transition={{ delay: 0.7 }}
       className="widget widget-medium cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
       onClick={onClick}
+      data-tour={dataTour}
     >
       <div className="flex items-start justify-between">
         <div>
@@ -371,7 +373,7 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) 
 };
 
 // Experience Widget (Mission Control-style)
-export const ExperienceWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const startDate = new Date(2022, 6, 1); // Jul 2022
   const nowDate = new Date();
   const totalMonths =
@@ -417,6 +419,7 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void }> = ({ onClick }
       transition={{ delay: 0.8 }}
       className="widget widget-2col cursor-pointer hover:scale-[1.02] transition-transform overflow-hidden"
       onClick={onClick}
+      data-tour={dataTour}
     >
       <div className="flex items-start justify-between">
         <div>

@@ -5,6 +5,7 @@ import MenuBar from '@/components/MenuBar';
 import Dock from '@/components/Dock';
 import AppWindow from '@/components/AppWindow';
 import MobileLayout from '@/components/MobileLayout';
+import WalkthroughTour, { type WalkthroughStep } from '@/components/WalkthroughTour';
 import { useIsMobile } from '@/hooks/use-mobile';
 import {
   CalendarWidget,
@@ -32,11 +33,17 @@ const Index = () => {
   const isMobile = useIsMobile();
   const [activeWindow, setActiveWindow] = useState<WindowId>(null);
   const [showIntroHint, setShowIntroHint] = useState(false);
+  const [walkthroughOpen, setWalkthroughOpen] = useState(false);
+  const [walkthroughStep, setWalkthroughStep] = useState(0);
 
   useEffect(() => {
-    const key = 'glassmorphic_intro_seen_v1';
+    // Important: don't show/record onboarding on mobile screens.
+    if (window.innerWidth < 768) return;
+
+    const key = 'glassmorphic_intro_seen_v2';
     try {
-      const seen = window.localStorage.getItem(key);
+      // const seen = window.localStorage.getItem(key);
+      const seen = false;
       if (!seen) {
         setShowIntroHint(true);
         window.localStorage.setItem(key, '1');
@@ -52,6 +59,49 @@ const Index = () => {
 
   const closeWindow = () => {
     setActiveWindow(null);
+  };
+
+  const walkthroughSteps: WalkthroughStep[] = [
+    {
+      target: 'about-panel',
+      title: 'About me (right side)',
+      description: 'This panel is always visible on desktop—scroll here for a quick overview and links.',
+    },
+    {
+      target: 'widget-experience',
+      title: 'Start here: Experience widget',
+      description: 'Click the highlighted widget to open the full timeline in a window.',
+      advanceOnTargetClick: true,
+    },
+    {
+      target: 'widget-skills',
+      title: 'Tech stack widget',
+      description: 'Click to open Skills and see the full stack + tools.',
+      advanceOnTargetClick: true,
+    },
+    {
+      target: 'widget-projects',
+      title: 'Projects widget',
+      description: 'Click to open Projects and explore case studies.',
+      advanceOnTargetClick: true,
+    },
+    {
+      target: 'dock',
+      title: 'Use the Dock to navigate',
+      description: 'Click any Dock icon to open its section—just like macOS.',
+      advanceOnTargetClick: true,
+    },
+    {
+      target: 'menubar',
+      title: 'Menu bar + help',
+      description: 'The menu bar is mostly aesthetic. Use the ? button anytime to replay this walkthrough.',
+    },
+  ];
+
+  const startWalkthrough = () => {
+    setShowIntroHint(false);
+    setWalkthroughStep(0);
+    setWalkthroughOpen(true);
   };
 
   const windowTitles: Record<string, string> = {
@@ -77,7 +127,15 @@ const Index = () => {
       }}
     >
       {/* macOS Menu Bar */}
-      <MenuBar />
+      <MenuBar onStartWalkthrough={startWalkthrough} />
+
+      <WalkthroughTour
+        open={walkthroughOpen}
+        steps={walkthroughSteps}
+        stepIndex={walkthroughStep}
+        onStepIndexChange={setWalkthroughStep}
+        onClose={() => setWalkthroughOpen(false)}
+      />
 
       {/* One-time interaction hint */}
       <AnimatePresence>
@@ -97,12 +155,20 @@ const Index = () => {
                     Click widgets to open sections. Use the Dock to navigate. The menu bar is decorative—your content opens in windows.
                   </div>
                 </div>
-                <button
-                  onClick={() => setShowIntroHint(false)}
-                  className="shrink-0 rounded-full bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1 text-white/80 text-xs"
-                >
-                  Got it
-                </button>
+                <div className="shrink-0 flex items-center gap-2">
+                  <button
+                    onClick={startWalkthrough}
+                    className="rounded-full bg-white/15 hover:bg-white/20 border border-white/10 px-3 py-1 text-white text-xs"
+                  >
+                    Walkthrough
+                  </button>
+                  <button
+                    onClick={() => setShowIntroHint(false)}
+                    className="rounded-full bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1 text-white/80 text-xs"
+                  >
+                    Got it
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -111,10 +177,10 @@ const Index = () => {
       
       {/* Desktop Widgets */}
       <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
-        <ExperienceWidget onClick={() => openWindow('experience')} />
+        <ExperienceWidget dataTour="widget-experience" onClick={() => openWindow('experience')} />
         <div className="flex gap-4 items-stretch">
-          <SkillsWidget onClick={() => openWindow('skills')} />
-          <ProjectsWidget onClick={() => openWindow('projects')} />
+          <SkillsWidget dataTour="widget-skills" onClick={() => openWindow('skills')} />
+          <ProjectsWidget dataTour="widget-projects" onClick={() => openWindow('projects')} />
         </div>
         {/* <div className="flex gap-4">
           <GitHubWidget />
@@ -130,6 +196,7 @@ const Index = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-10 right-4 z-20 pt-4 w-[600px] max-h-[calc(100vh-120px)] overflow-y-auto"
+        data-tour="about-panel"
         style={{
           scrollbarWidth: 'thin',
           scrollbarColor: 'rgba(255,255,255,0.3) transparent'

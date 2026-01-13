@@ -30,6 +30,24 @@ interface DockProps {
   onOpenWindow: (windowId: string) => void;
 }
 
+const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) => (
+  <motion.button
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.05 * index + 0.3, duration: 0.3 }}
+    whileHover={{ y: -12, scale: 1.15 }}
+    whileTap={{ scale: 0.95 }}
+    onClick={item.onClick}
+    className="dock-icon-btn group relative"
+    aria-label={item.label}
+  >
+    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
+      <item.icon className="w-5 h-5 text-white" />
+    </div>
+    <span className="dock-tooltip">{item.label}</span>
+  </motion.button>
+);
+
 const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
   const mainApps: DockItem[] = [
     { icon: Compass, label: 'Finder', color: 'from-blue-400 to-blue-600', onClick: () => onOpenWindow('about') },
@@ -50,28 +68,8 @@ const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
     { icon: Settings, label: 'Settings', color: 'from-gray-400 to-gray-600' },
   ];
 
-  const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) => (
-    <motion.button
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.05 * index + 0.3, duration: 0.3 }}
-      whileHover={{ y: -12, scale: 1.15 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={item.onClick}
-      className="dock-icon-btn group relative"
-      aria-label={item.label}
-    >
-      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
-        <item.icon className="w-5 h-5 text-white" />
-      </div>
-      <span className="dock-tooltip">
-        {item.label}
-      </span>
-    </motion.button>
-  );
-
   return (
-    <div className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[9999]">
+    <div className="fixed bottom-2 left-1/2 -translate-x-1/2 z-[9999]" data-tour="dock">
       <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
