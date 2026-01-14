@@ -177,8 +177,8 @@ export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }>
      { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
     { name: 'NextJS', icon: SiNextdotjs, color: 'text-white' },
    
-    // { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
-    { name: 'Java', icon: FaJava, color: 'text-red-400' },
+    { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
+    // { name: 'Java', icon: FaJava, color: 'text-red-400' },
     { name: 'AWS', icon: FaAws, color: 'text-orange-400' },
     { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
   ];

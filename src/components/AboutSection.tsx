@@ -45,15 +45,15 @@ const AboutSection: React.FC = () => {
               <p className="text-blue-400 font-medium">Full Stack Developer & Problem Solver</p>
             </div>
             <p className="text-white/80 leading-relaxed mb-4">
-              Passionate full-stack developer with 2+ years of experience building scalable applications. 
-              I specialize in Flutter, Go, Python, and modern web technologies. Currently working on 
-              cutting-edge projects involving AI integration, real-time systems, and cross-platform development.
-            </p>
-            <p className="text-white/70 leading-relaxed mb-4">
-              As a hackathon enthusiast and team leader, I've led multiple successful projects from concept 
-              to deployment. I thrive in collaborative environments and enjoy mentoring fellow developers. 
-              Always learning, always building, always improving.
-            </p>
+  Hey! I’m a full-stack developer who loves building useful things and making computers do boring work for me. 
+  I’ve been doing this for 3+ years now, turning ideas into real products that people can actually use.
+</p>
+
+<p className="text-white/70 leading-relaxed mb-4">
+  I enjoy working on everything from apps to systems behind the scenes, leading teams, and improving things bit by bit. 
+  Big fan of learning by building, shipping early, and fixing things along the way.
+</p>
+
             <div className="flex items-center gap-2 text-sm text-white/60 mb-4">
               <MapPin className="w-4 h-4" />
               <span>Bangalore, India</span>
