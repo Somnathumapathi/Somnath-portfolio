@@ -245,13 +245,7 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string 
       icon: Shield,
       gradient: 'from-blue-500 via-cyan-500 to-indigo-500',
       chips: ['AWS', 'RAG', 'CloudTrail'],
-    },
-    {
-      name: 'n8nBot',
-      tagline: 'Whatsapp hubspot automation',
-      icon: Shield,
-      gradient: 'from-blue-500 via-cyan-500 to-indigo-500',
-      chips: ['n8n', 'WhatsApp', 'HubSpot'],
+      github: 'https://github.com/Somnathumapathi/SentinalAi-backend'
     },
     {
       name: 'Hookit',
@@ -259,6 +253,7 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string 
       icon: Webhook,
       gradient: 'from-purple-500 via-pink-500 to-fuchsia-500',
       chips: ['Go', 'SaaS', 'Webhooks'],
+      github: 'https://github.com/Somnathumapathi/hookit'
     },
     {
       name: 'Trash Trace',
@@ -266,6 +261,7 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string 
       icon: Trash2,
       gradient: 'from-emerald-500 via-green-500 to-teal-500',
       chips: ['Flutter', 'IoT', 'Flask'],
+      github: 'https://github.com/Somnathumapathi/TrashTrace-MiniProject'
     },
     {
       name: 'ChETHFunds',
@@ -273,7 +269,16 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string 
       icon: Link,
       gradient: 'from-orange-500 via-red-500 to-rose-500',
       chips: ['Solidity', 'Next.js', 'Viem'],
+      github: 'https://github.com/Somnathumapathi/chEthFunds'
     },
+    //For more projects, open
+    {
+      name: 'For More Projects',
+      tagline: 'Click on this →',
+      icon: FolderGit2,
+      gradient: 'from-gray-500 via-gray-600 to-gray-700',
+      chips: ['Projects'],
+    }
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -392,6 +397,26 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: strin
   const yearsLabel = years >= 1 ? `${years}+` : '1+';
 
   const cards = [
+    
+    
+    {
+      company: 'Fit Choice World',
+      role: 'Full Stack • Freelance',
+      period: 'Sep 2024 – Nov 2025',
+      location: 'Remote',
+      type: 'Freelance',
+      accent: 'from-emerald-500/35 to-teal-500/25',
+      logo: fitchoiceworldLogo,
+    },
+    {
+      company: 'Win Research Centre',
+      role: 'Full Stack • Team Lead',
+      period: 'May 2025 – Current',
+      location: 'Bangalore',
+      type: 'Remote',
+      accent: 'from-purple-500/35 to-pink-500/25',
+      logo: wrcLogo,
+    },
     {
       company: 'Neosapien',
       role: 'Full Stack Developer',
@@ -400,24 +425,6 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: strin
       type: 'Full-time',
       accent: 'from-cyan-500/35 to-indigo-500/30',
       logo: neosapienLogo,
-    },
-    {
-      company: 'Win Research Centre',
-      role: 'Full Stack • Team Lead',
-      period: 'May 2025 – Current',
-      location: 'Bangalore',
-      type: 'Full-time',
-      accent: 'from-purple-500/35 to-pink-500/25',
-      logo: wrcLogo,
-    },
-    {
-      company: 'Fit Choice World',
-      role: 'Full Stack • Freelance',
-      period: 'Sep 2024 – Current',
-      location: 'Remote',
-      type: 'Freelance',
-      accent: 'from-emerald-500/35 to-teal-500/25',
-      logo: fitchoiceworldLogo,
     },
   ];
 

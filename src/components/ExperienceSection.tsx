@@ -39,7 +39,7 @@ const experiences: Experience[] = [
     role: "Full Stack Developer, Team Leader",
     period: "May 2025 – Current",
     location: "Bangalore, KA",
-    type: "Full-time",
+    type: "Remote",
     tech: "Go, Python, Flutter",
     highlights: [
       "Collaborated with cross-functional teams to deliver secure and efficient services",
@@ -51,7 +51,7 @@ const experiences: Experience[] = [
   {
     company: "Fit Choice World",
     role: "Full Stack Developer, Team Leader",
-    period: "Sep 2024 – Current",
+    period: "Sep 2024 – Nov 2025",
     location: "Remote",
     type: "Freelance",
     tech: "Flutter, ExpressJs, NextJs",
@@ -64,8 +64,8 @@ const experiences: Experience[] = [
   },
   {
     company: "Yoga Clan",
-    role: "ˇApril 2024 – October 2024",
-    period: "May 2025 – Current",
+    role: "Full Stack Developer",
+    period: "Apr 2024 - Oct 2024",
     location: "Bangalore, KA",
     type: "Full-time",
     tech: "Flutter, NextJs",
