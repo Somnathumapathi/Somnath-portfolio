@@ -1,5 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import {
+  SiAndroidstudio,
+  SiDart,
+  SiDocker,
+  SiExpress,
+  SiFastapi,
+  SiFirebase,
+  SiFlask,
+  SiFlutter,
+  SiGithub,
+  SiGo,
+  SiJavascript,
+  SiKubernetes,
+  SiLaravel,
+  SiMongodb,
+  SiNextdotjs,
+  SiPhp,
+  SiPython,
+  SiSolidity,
+  SiSupabase,
+  SiTypescript,
+  SiWordpress,
+} from 'react-icons/si';
+import { FaAws, FaJava } from 'react-icons/fa';
+import { VscCode } from 'react-icons/vsc';
 
 interface SkillCategory {
   title: string;
@@ -35,6 +60,36 @@ const skillCategories: SkillCategory[] = [
   },
 ];
 
+const skillIcons: Record<string, { Icon: React.ElementType; color: string }> = {
+  Dart: { Icon: SiDart, color: 'text-cyan-300' },
+  Python: { Icon: SiPython, color: 'text-yellow-300' },
+  JavaScript: { Icon: SiJavascript, color: 'text-yellow-400' },
+  TypeScript: { Icon: SiTypescript, color: 'text-blue-400' },
+  Go: { Icon: SiGo, color: 'text-cyan-400' },
+  Java: { Icon: FaJava, color: 'text-red-400' },
+  Solidity: { Icon: SiSolidity, color: 'text-white/80' },
+  PHP: { Icon: SiPhp, color: 'text-indigo-300' },
+
+  Flutter: { Icon: SiFlutter, color: 'text-blue-400' },
+  FastAPI: { Icon: SiFastapi, color: 'text-emerald-300' },
+  Flask: { Icon: SiFlask, color: 'text-white/80' },
+  'Next.js': { Icon: SiNextdotjs, color: 'text-white' },
+  'Express.js': { Icon: SiExpress, color: 'text-white/80' },
+  Laravel: { Icon: SiLaravel, color: 'text-red-400' },
+
+  'VS Code': { Icon: VscCode, color: 'text-blue-400' },
+  'Android Studio': { Icon: SiAndroidstudio, color: 'text-green-400' },
+  GitHub: { Icon: SiGithub, color: 'text-white/80' },
+  Docker: { Icon: SiDocker, color: 'text-blue-400' },
+  Kubernetes: { Icon: SiKubernetes, color: 'text-blue-300' },
+  WordPress: { Icon: SiWordpress, color: 'text-sky-300' },
+
+  Firebase: { Icon: SiFirebase, color: 'text-amber-400' },
+  Supabase: { Icon: SiSupabase, color: 'text-emerald-400' },
+  MongoDB: { Icon: SiMongodb, color: 'text-green-400' },
+  AWS: { Icon: FaAws, color: 'text-orange-400' },
+};
+
 const SkillsSection: React.FC = () => {
   return (
     <div className="space-y-6">
@@ -55,15 +110,23 @@ const SkillsSection: React.FC = () => {
             </div>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill, skillIndex) => (
+                (() => {
+                  const icon = skillIcons[skill];
+                  const Icon = icon?.Icon;
+
+                  return (
                 <motion.span
                   key={skill}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: catIndex * 0.1 + skillIndex * 0.03 }}
-                  className="skill-tag"
+                  className="skill-tag inline-flex items-center gap-2"
                 >
+                  {Icon ? <Icon className={`h-4 w-4 ${icon.color}`} aria-hidden="true" /> : null}
                   {skill}
                 </motion.span>
+                  );
+                })()
               ))}
             </div>
           </motion.div>

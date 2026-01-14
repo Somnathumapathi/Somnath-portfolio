@@ -178,7 +178,7 @@ const Index = () => {
       {/* Desktop Widgets */}
       <div className="fixed top-10 left-4 z-20 flex flex-col gap-4 pt-4">
         <ExperienceWidget dataTour="widget-experience" onClick={() => openWindow('experience')} />
-        <div className="flex gap-4 items-stretch">
+        <div className="flex gap-4 items-start">
           <SkillsWidget dataTour="widget-skills" onClick={() => openWindow('skills')} />
           <ProjectsWidget dataTour="widget-projects" onClick={() => openWindow('projects')} />
         </div>
