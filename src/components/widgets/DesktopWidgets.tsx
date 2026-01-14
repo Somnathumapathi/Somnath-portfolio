@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2 } from 'lucide-react';
 import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
-import {FaAws} from 'react-icons/fa'
+import {FaAws, FaJava} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
 import resume from '@/assets/Somnath_resume.pdf';
 import neosapienLogo from '@/assets/neosapien.png';
@@ -174,9 +174,11 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
 export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const skills = [
     { name: 'Flutter', icon: SiFlutter, color: 'text-blue-400' },
-    { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
+     { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
     { name: 'NextJS', icon: SiNextdotjs, color: 'text-white' },
-    { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
+   
+    // { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
+    { name: 'Java', icon: FaJava, color: 'text-red-400' },
     { name: 'AWS', icon: FaAws, color: 'text-orange-400' },
     { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
   ];
@@ -243,6 +245,13 @@ export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string 
       icon: Shield,
       gradient: 'from-blue-500 via-cyan-500 to-indigo-500',
       chips: ['AWS', 'RAG', 'CloudTrail'],
+    },
+    {
+      name: 'n8nBot',
+      tagline: 'Whatsapp hubspot automation',
+      icon: Shield,
+      gradient: 'from-blue-500 via-cyan-500 to-indigo-500',
+      chips: ['n8n', 'WhatsApp', 'HubSpot'],
     },
     {
       name: 'Hookit',

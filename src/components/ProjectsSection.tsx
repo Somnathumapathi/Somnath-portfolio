@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Shield, Webhook, Trash2, Link } from 'lucide-react';
+import { ExternalLink, Github, Shield, Webhook, Trash2, Link, Bot, HeartPulse, Briefcase } from 'lucide-react';
 
 interface Project {
   name: string;
@@ -34,8 +34,9 @@ const projects: Project[] = [
       "Webhooks and workflow customization for developers",
     ],
     icon: Webhook,
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-violet-500 to-purple-500",
   },
+
   {
     name: "Trash Trace",
     tech: "Flutter, Flask, NextJs, C++, Arduino",
@@ -46,7 +47,19 @@ const projects: Project[] = [
       "ReCyclX: Doorstep Recyclable Material Collection",
     ],
     icon: Trash2,
-    gradient: "from-green-500 to-emerald-500",
+    gradient: "from-emerald-500 to-teal-500",
+  },
+  {
+    name: "n8n-whatsapp-hubspot-bot",
+    tech: "n8n, WhatsApp API, HubSpot API, NodeJs, Python",
+    description: "Automated WhatsApp bot integrated with HubSpot CRM for lead management and follow up",
+    highlights: [
+      "The bot goes through the lead details from HubSpot and initiates WhatsApp conversations",
+      "Lead stastus, last follow up date, previou, responses are all taken as context",
+      "Smart replies are generated using bot with context and business details sent to the lead",
+    ],
+    icon: Bot,
+    gradient: "from-slate-700 to-sky-500",
   },
   {
     name: "ChETHFunds",
@@ -58,7 +71,31 @@ const projects: Project[] = [
       "Responsive UI with interactive features",
     ],
     icon: Link,
-    gradient: "from-orange-500 to-red-500",
+    gradient: "from-orange-500 to-rose-500",
+  },
+  {
+    name: "Medical-Assistant",
+    tech: "Flutter, Firebase, Tensorflow, Google Teachable Machine",
+    description: "Doctor and patient assistance and heart attack detection app",
+    highlights: [
+      "Listens to the doctor and patient conversation and helps in summarizing the diagnaosis",
+      "Generates prescriptions based on the conversation and alerts the patient to take medicines on time",
+      "Detects heart attack risk using ML model integrated with Flutter app",
+    ],
+    icon: HeartPulse,
+    gradient: "from-rose-500 to-pink-500",
+  },
+  {
+    name: "Worce",
+    tech: "NextJs, Firebase, Solidity, Hardhat, Ethers.js",
+    description: "Website for demand creator and supply provider contracts",
+    highlights: [
+      "Facilitates secure agreements between demand creators and supply providers using smart contracts",
+      "Automated payment releases upon milestone completions",
+      "User-friendly interface for contract management and tracking",
+    ],
+    icon: Briefcase,
+    gradient: "from-yellow-500 to-amber-500",
   },
 ];
 
