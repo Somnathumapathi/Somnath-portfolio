@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2 } from 'lucide-react';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2, Brain } from 'lucide-react';
 import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
 import {FaAws, FaJava} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
@@ -239,6 +239,14 @@ export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }>
 // Projects Widget
 export const ProjectsWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const featuredProjects = [
+    {
+      name: 'eSRL',
+      tagline: 'AI-driven learning platform',
+      icon: Brain,
+      gradient: 'from-indigo-500 via-purple-500 to-pink-500',
+      chips: ['Python', 'LLMs', 'RAG'],
+      github: 'https://github.com/Somnathumapathi/esrl_basic'
+    },
     {
       name: 'SentinelAI',
       tagline: 'Cloud security, in real time',

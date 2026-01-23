@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Shield, Webhook, Trash2, Link, Bot, HeartPulse, Briefcase } from 'lucide-react';
+import { ExternalLink, Shield, Webhook, Trash2, Link, Bot, HeartPulse, Briefcase, Brain } from 'lucide-react';
 
 interface Project {
   name: string;
@@ -13,6 +13,21 @@ interface Project {
 }
 
 const projects: Project[] = [
+  {
+  name: "eSRL",
+  tech: "Python, LLMs, RAG, PyTesseract, Manim, Phaser.js, React, Node.js",
+  description:
+    "AI-driven learning platform that transforms static PDFs into interactive videos and gamified assessments to promote self-regulated learning.",
+  highlights: [
+    "RAG-based AI pipeline converts educational PDFs into structured learning units",
+    "Generates animated explanatory videos using Manim with voiceovers",
+    "Creates adaptive gamified assessments aligned with Self-Regulated Learning phases"
+  ],
+  icon: Brain,
+  gradient: "from-indigo-500 to-purple-600",
+  github: 'https://github.com/Somnathumapathi/esrl_basic'
+}
+,
   {
     name: "SentinelAI",
     tech: "Go, AWS, CloudTrail, RAG AI, Next.Js",

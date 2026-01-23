@@ -42,7 +42,7 @@ const AboutSection: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 mb-4">
               <Code2 className="w-4 h-4 text-blue-400" />
-              <p className="text-blue-400 font-medium">Full Stack Developer & Problem Solver</p>
+              <p className="text-blue-400 font-medium">Full Stack Developer</p>
             </div>
             <p className="text-white/80 leading-relaxed mb-4">
   Hey! I’m a full-stack developer who loves building useful things and making computers do boring work for me. 
