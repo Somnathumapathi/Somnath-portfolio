@@ -68,7 +68,7 @@ const AboutSection: React.FC = () => {
                 <span>Download Resume</span>
               </a>
               <a 
-                href="https://github.com/somnathumapathi" 
+                href="https://github.com/Somnathumapathi/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
@@ -76,7 +76,7 @@ const AboutSection: React.FC = () => {
                 <Github className="w-5 h-5 text-white" />
               </a>
               <a 
-                href="https://linkedin.com/in/somnathumapathi" 
+                href="https://www.linkedin.com/in/somnath-umapathi-9a485a205/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"

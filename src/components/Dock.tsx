@@ -49,6 +49,10 @@ const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) 
 );
 
 const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
+  const openExternal = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const mainApps: DockItem[] = [
     { icon: Compass, label: 'Finder', color: 'from-blue-400 to-blue-600', onClick: () => onOpenWindow('about') },
     { icon: Mail, label: 'Mail', color: 'from-blue-500 to-blue-700', onClick: () => onOpenWindow('contact') },
@@ -63,8 +67,18 @@ const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
   ];
 
   const externalApps: DockItem[] = [
-    { icon: Github, label: 'GitHub', color: 'from-gray-700 to-gray-900' },
-    { icon: Linkedin, label: 'LinkedIn', color: 'from-blue-500 to-blue-700' },
+    {
+      icon: Github,
+      label: 'GitHub',
+      color: 'from-gray-700 to-gray-900',
+      onClick: () => openExternal('https://github.com/Somnathumapathi/'),
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      color: 'from-blue-500 to-blue-700',
+      onClick: () => openExternal('https://www.linkedin.com/in/somnath-umapathi-9a485a205/'),
+    },
     { icon: Settings, label: 'Settings', color: 'from-gray-400 to-gray-600' },
   ];
 
