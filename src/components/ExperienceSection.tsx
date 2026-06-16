@@ -6,6 +6,7 @@ import wrcLogo from '@/assets/wrc.png';
 import fitchoiceworldLogo from '@/assets/fitchoiceworld.png';
 import yogaclanLogo from '@/assets/yogaclan.jpg';
 import zyluLogo from '@/assets/zylu.png';
+import zenactLogo from '@/assets/zenact.png';
 
 interface Experience {
   company: string;
@@ -20,17 +21,32 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    company: "Zenact AI",
+    role: "Software Engineer",
+    period: "March 2026 – Current",
+    location: "Bangalore, KA",
+    type: "Full-time",
+    tech: "Go, Java, TypeScript, Temporal, gRPC, AWS, Appium",
+    highlights: [
+      "Building an agentic mobile QA platform where AI agents execute natural-language test journeys on real mobile apps.",
+      "Worked across the stack — backend services, AI agent workflows, and device orchestration — to power autonomous test execution.",
+      "Designed and built MacFarm, an in-house device provider with a control-plane / data-plane architecture, along with broader device orchestration — provisioning, slot leasing, lifecycle, and live screen casting.",
+      "Built mobile automation and CI/CD integrations that help teams catch bugs and regressions before release.",
+    ],
+    logo: zenactLogo,
+  },
+  {
     company: "Neosapien",
     role: "Full Stack Developer",
-    period: "November 2025 – Current",
+    period: "November 2025 – January 2026",
     location: "Bangalore, KA",
     type: "Full-time",
     tech: "Python, Flutter, Kafka",
     highlights: [
-      "Desigened added new Vap animations in the app.",
-      "Used bluetooth low energy and managed connections with the app.",
-      "Intgrated google and microsoft calendar APIs for event management.",
-      "Implemented memorygeneration pipeline using fastapi and kafka"
+      "Designed and added new VAP animations in the app.",
+      "Used Bluetooth Low Energy and managed device connections from the app.",
+      "Integrated Google and Microsoft Calendar APIs for event management.",
+      "Implemented a memory generation pipeline using FastAPI and Kafka.",
     ],
     logo: neosapienLogo,
   },

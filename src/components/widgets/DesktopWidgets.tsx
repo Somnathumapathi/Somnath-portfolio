@@ -10,6 +10,7 @@ import wrcLogo from '@/assets/wrc.png';
 import fitchoiceworldLogo from '@/assets/fitchoiceworld.png';
 import yogaclanLogo from '@/assets/yogaclan.jpg';
 import zyluLogo from '@/assets/zylu.png';
+import zenactLogo from '@/assets/zenact.png';
 
 // Calendar Widget
 export const CalendarWidget: React.FC = () => {
@@ -428,11 +429,20 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: strin
     {
       company: 'Neosapien',
       role: 'Full Stack Developer',
-      period: 'Nov 2025 – Current',
+      period: 'Nov 2025 – Jan 2026',
       location: 'Bangalore',
       type: 'Full-time',
       accent: 'from-cyan-500/35 to-indigo-500/30',
       logo: neosapienLogo,
+    },
+    {
+      company: 'Zenact AI',
+      role: 'Software Engineer',
+      period: 'Mar 2026 – Current',
+      location: 'Bangalore',
+      type: 'Full-time',
+      accent: 'from-orange-500/35 to-red-500/25',
+      logo: zenactLogo,
     },
   ];
 
@@ -471,7 +481,7 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: strin
           <div className="mt-3 space-y-2">
             <div className="flex items-center justify-between rounded-xl bg-white/5 px-2.5 py-2">
               <span className="text-white/60 text-[11px]">Companies</span>
-              <span className="text-white font-semibold text-sm">5</span>
+              <span className="text-white font-semibold text-sm">6</span>
             </div>
             <div className="flex items-center justify-between rounded-xl bg-white/5 px-2.5 py-2">
               <span className="text-white/60 text-[11px]">Projects</span>
@@ -494,9 +504,10 @@ export const ExperienceWidget: React.FC<{ onClick?: () => void; dataTour?: strin
             <div className="mt-2 relative h-[150px]">
               {cards.map((c, idx) => {
                 const styles = [
-                  { z: 1, t: 'translate-x-10 translate-y-10 rotate-[2deg]', s: 'scale-[0.96]', o: 'opacity-60' },
-                  { z: 2, t: 'translate-x-5 translate-y-5 rotate-[1deg]', s: 'scale-[0.98]', o: 'opacity-80' },
-                  { z: 3, t: 'translate-x-0 translate-y-0 rotate-0', s: 'scale-100', o: 'opacity-100' },
+                  { z: 1, t: 'translate-x-12 translate-y-12 rotate-[3deg]', s: 'scale-[0.94]', o: 'opacity-50' },
+                  { z: 2, t: 'translate-x-8 translate-y-8 rotate-[2deg]', s: 'scale-[0.96]', o: 'opacity-65' },
+                  { z: 3, t: 'translate-x-4 translate-y-4 rotate-[1deg]', s: 'scale-[0.98]', o: 'opacity-85' },
+                  { z: 4, t: 'translate-x-0 translate-y-0 rotate-0', s: 'scale-100', o: 'opacity-100' },
                 ][idx] ?? { z: 1, t: 'translate-x-0 translate-y-0 rotate-0', s: 'scale-100', o: 'opacity-100' };
 
                 return (
