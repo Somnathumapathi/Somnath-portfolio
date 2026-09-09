@@ -1,28 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Compass, 
-  AppWindow, 
-  MessageCircle, 
-  Mail, 
-  Calendar,
-  Image,
-  Music,
-  Settings,
-  FolderOpen,
-  FileText,
-  User,
-  Code,
-  Terminal,
-  Chrome,
-  Github,
-  Linkedin
-} from 'lucide-react';
+import {
+  AppIconProps,
+  ContactsIcon,
+  FinderIcon,
+  FolderIcon,
+  GithubIcon,
+  LinkedinIcon,
+  MailIcon,
+  NotesIcon,
+  PhotosIcon,
+  SettingsIcon,
+  TerminalIcon,
+} from './AppIcons';
 
 interface DockItem {
-  icon: React.ElementType;
+  icon: React.FC<AppIconProps>;
   label: string;
-  color: string;
   onClick?: () => void;
 }
 
@@ -41,9 +35,7 @@ const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) 
     className="dock-icon-btn group relative"
     aria-label={item.label}
   >
-    <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center shadow-lg`}>
-      <item.icon className="w-5 h-5 text-white" />
-    </div>
+    <item.icon className="w-10 h-10 drop-shadow-[0_3px_6px_rgba(0,0,0,0.45)]" />
     <span className="dock-tooltip">{item.label}</span>
   </motion.button>
 );
@@ -54,32 +46,30 @@ const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
   };
 
   const mainApps: DockItem[] = [
-    { icon: Compass, label: 'Finder', color: 'from-blue-400 to-blue-600', onClick: () => onOpenWindow('about') },
-    { icon: Mail, label: 'Mail', color: 'from-blue-500 to-blue-700', onClick: () => onOpenWindow('contact') },
-    { icon: Image, label: 'Photos', color: 'from-purple-400 via-pink-500 to-orange-400' },
+    { icon: FinderIcon, label: 'Finder', onClick: () => onOpenWindow('about') },
+    { icon: MailIcon, label: 'Mail', onClick: () => onOpenWindow('contact') },
+    { icon: PhotosIcon, label: 'Photos' },
   ];
 
   const portfolioApps: DockItem[] = [
-    { icon: User, label: 'About Me', color: 'from-cyan-400 to-blue-500', onClick: () => onOpenWindow('about') },
-    { icon: FolderOpen, label: 'Projects', color: 'from-blue-400 to-indigo-500', onClick: () => onOpenWindow('projects') },
-    { icon: Code, label: 'Skills', color: 'from-orange-400 to-red-500', onClick: () => onOpenWindow('skills') },
-    { icon: FileText, label: 'Experience', color: 'from-yellow-400 to-orange-500', onClick: () => onOpenWindow('experience') },
+    { icon: ContactsIcon, label: 'About Me', onClick: () => onOpenWindow('about') },
+    { icon: FolderIcon, label: 'Projects', onClick: () => onOpenWindow('projects') },
+    { icon: TerminalIcon, label: 'Skills', onClick: () => onOpenWindow('skills') },
+    { icon: NotesIcon, label: 'Experience', onClick: () => onOpenWindow('experience') },
   ];
 
   const externalApps: DockItem[] = [
     {
-      icon: Github,
+      icon: GithubIcon,
       label: 'GitHub',
-      color: 'from-gray-700 to-gray-900',
       onClick: () => openExternal('https://github.com/Somnathumapathi/'),
     },
     {
-      icon: Linkedin,
+      icon: LinkedinIcon,
       label: 'LinkedIn',
-      color: 'from-blue-500 to-blue-700',
       onClick: () => openExternal('https://www.linkedin.com/in/somnath-umapathi-9a485a205/'),
     },
-    { icon: Settings, label: 'Settings', color: 'from-gray-400 to-gray-600' },
+    { icon: SettingsIcon, label: 'Settings' },
   ];
 
   return (
