@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, Sparkles, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2, Brain } from 'lucide-react';
-import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker } from 'react-icons/si';
+import { Cloud, MapPin, Github, Coffee, Code2, TrendingUp, Zap, BookOpen, ArrowRight, Download, Briefcase, FolderGit2, Shield, Webhook, Trash2, Link, Calendar, Building2, Brain } from 'lucide-react';
+import { SiFlutter, SiGo, SiNextdotjs, SiPython, SiDocker, SiTemporal } from 'react-icons/si';
 import {FaAws, FaJava} from 'react-icons/fa'
 import somnathPhoto from '@/assets/somnath-photo.jpg';
 import resume from '@/assets/Somnath_resume.pdf';
@@ -174,14 +174,17 @@ export const ProfileWidget: React.FC<{ onClick?: () => void }> = ({ onClick }) =
 // Skills Stats Widget
 export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }> = ({ onClick, dataTour }) => {
   const skills = [
-    { name: 'Flutter', icon: SiFlutter, color: 'text-blue-400' },
-     { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
-    { name: 'NextJS', icon: SiNextdotjs, color: 'text-white' },
-   
+    // Top row
     { name: 'Go', icon: SiGo, color: 'text-cyan-400' },
     // { name: 'Java', icon: FaJava, color: 'text-red-400' },
     { name: 'AWS', icon: FaAws, color: 'text-orange-400' },
     { name: 'Docker', icon: SiDocker, color: 'text-blue-500' },
+
+    // Bottom row
+    { name: 'Python', icon: SiPython, color: 'text-yellow-400' },
+    { name: 'NextJS', icon: SiNextdotjs, color: 'text-white' },
+    { name: 'Temporal', icon: SiTemporal, color: 'text-sky-400' },
+    // { name: 'Flutter', icon: SiFlutter, color: 'text-blue-400' },
   ];
 
   return (
@@ -194,10 +197,7 @@ export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }>
       data-tour={dataTour}
     >
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-purple-400" />
-          <div className="text-white/90 text-sm font-semibold">TECH STACK</div>
-        </div>
+        <div className="text-white/90 text-sm font-semibold">TECH STACK</div>
         <motion.div 
           className="flex items-center gap-1 text-white/50 text-xs group-hover:text-white/80 transition-colors"
           whileHover={{ x: 3 }}
@@ -229,7 +229,7 @@ export const SkillsWidget: React.FC<{ onClick?: () => void; dataTour?: string }>
       
       <div className="pt-2 border-t border-white/10">
         <div className="text-white/60 text-xs flex items-center gap-1">
-          <span>+10 more technologies</span>
+          <span>36+ technologies</span>
           <span className="text-purple-400">→</span>
         </div>
       </div>

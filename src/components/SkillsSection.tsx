@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import {
   SiAndroidstudio,
+  SiAppium,
   SiDart,
   SiDocker,
   SiExpress,
@@ -16,10 +17,14 @@ import {
   SiLaravel,
   SiMongodb,
   SiNextdotjs,
+  SiOpentelemetry,
   SiPhp,
   SiPython,
+  SiRedis,
   SiSolidity,
   SiSupabase,
+  SiTemporal,
+  SiTerraform,
   SiTypescript,
   SiWordpress,
 } from 'react-icons/si';
@@ -40,22 +45,22 @@ const skillCategories: SkillCategory[] = [
   },
   {
     title: "Frameworks",
-    skills: ["Flutter", "FastAPI", "Flask", "Next.js", "Express.js", "Fiber", "Gin", "Laravel"],
+    skills: ["Flutter", "FastAPI", "Flask", "Next.js", "Express.js", "Fiber", "Gin", "Laravel", "Temporal"],
     color: "from-purple-500 to-pink-500",
   },
   {
     title: "Developer Tools",
-    skills: ["VS Code", "Android Studio", "GitHub", "Docker", "Kubernetes", "WordPress"],
+    skills: ["VS Code", "Android Studio", "GitHub", "Docker", "Kubernetes", "WordPress", "Terraform", "Appium", "OpenTelemetry"],
     color: "from-orange-500 to-red-500",
   },
   {
     title: "Databases, Cloud and ORMs",
-    skills: ["Firebase", "Supabase", "MongoDB", "SQLAlchemy", "AWS"],
+    skills: ["Firebase", "Supabase", "MongoDB", "SQLAlchemy", "AWS", "Redis"],
     color: "from-yellow-500 to-amber-500",
   },
   {
     title: "Others",
-    skills: ["OOPS", "SOLID Principles", "Cloud", "SQL", "NoSQL", "CI/CD", "Microservices"],
+    skills: ["OOPS", "SOLID Principles", "Cloud", "SQL", "NoSQL", "CI/CD", "Microservices", "gRPC", "Protocol Buffers", "Sandboxes"],
     color: "from-green-500 to-teal-500",
   },
 ];
@@ -76,6 +81,7 @@ const skillIcons: Record<string, { Icon: React.ElementType; color: string }> = {
   'Next.js': { Icon: SiNextdotjs, color: 'text-white' },
   'Express.js': { Icon: SiExpress, color: 'text-white/80' },
   Laravel: { Icon: SiLaravel, color: 'text-red-400' },
+  Temporal: { Icon: SiTemporal, color: 'text-sky-300' },
 
   'VS Code': { Icon: VscCode, color: 'text-blue-400' },
   'Android Studio': { Icon: SiAndroidstudio, color: 'text-green-400' },
@@ -83,11 +89,15 @@ const skillIcons: Record<string, { Icon: React.ElementType; color: string }> = {
   Docker: { Icon: SiDocker, color: 'text-blue-400' },
   Kubernetes: { Icon: SiKubernetes, color: 'text-blue-300' },
   WordPress: { Icon: SiWordpress, color: 'text-sky-300' },
+  Terraform: { Icon: SiTerraform, color: 'text-violet-400' },
+  Appium: { Icon: SiAppium, color: 'text-fuchsia-300' },
+  OpenTelemetry: { Icon: SiOpentelemetry, color: 'text-indigo-300' },
 
   Firebase: { Icon: SiFirebase, color: 'text-amber-400' },
   Supabase: { Icon: SiSupabase, color: 'text-emerald-400' },
   MongoDB: { Icon: SiMongodb, color: 'text-green-400' },
   AWS: { Icon: FaAws, color: 'text-orange-400' },
+  Redis: { Icon: SiRedis, color: 'text-red-400' },
 };
 
 const SkillsSection: React.FC = () => {
