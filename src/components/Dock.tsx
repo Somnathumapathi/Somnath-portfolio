@@ -1,5 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 import {
   AppIconProps,
   ContactsIcon,
@@ -24,23 +30,64 @@ interface DockProps {
   onOpenWindow: (windowId: string) => void;
 }
 
-const DockIcon: React.FC<{ item: DockItem; index: number }> = ({ item, index }) => (
-  <motion.button
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.05 * index + 0.3, duration: 0.3 }}
-    whileHover={{ y: -12, scale: 1.15 }}
-    whileTap={{ scale: 0.95 }}
-    onClick={item.onClick}
-    className="dock-icon-btn group relative"
-    aria-label={item.label}
-  >
-    <item.icon className="w-10 h-10 drop-shadow-[0_3px_6px_rgba(0,0,0,0.45)]" />
-    <span className="dock-tooltip">{item.label}</span>
-  </motion.button>
-);
+// macOS dock magnification: every icon grows with how close the cursor is,
+// so neighbours swell too instead of one icon popping on hover.
+const BASE_SIZE = 40;
+const MAX_SIZE = 56;
+const FALLOFF = 130;
+
+const DockIcon: React.FC<{
+  item: DockItem;
+  index: number;
+  mouseX: MotionValue<number>;
+}> = ({ item, index, mouseX }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  const distance = useTransform(mouseX, (x) => {
+    const bounds = ref.current?.getBoundingClientRect();
+    if (!bounds) return Number.MAX_SAFE_INTEGER;
+    return x - bounds.x - bounds.width / 2;
+  });
+
+  const targetSize = useTransform(
+    distance,
+    [-FALLOFF, 0, FALLOFF],
+    [BASE_SIZE, MAX_SIZE, BASE_SIZE],
+    { clamp: true }
+  );
+  const size = useSpring(targetSize, { mass: 0.1, stiffness: 190, damping: 14 });
+
+  return (
+    <motion.button
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      // Only the entrance is staggered - a delay here would also hold up the
+      // magnification, so gestures override it with their own transition.
+      transition={{ delay: 0.05 * index + 0.3, duration: 0.3 }}
+      whileTap={{ scale: 0.92, transition: { duration: 0.08, delay: 0 } }}
+      onClick={item.onClick}
+      className="dock-icon-btn group relative"
+      aria-label={item.label}
+    >
+      {/* Fixed height keeps the bar from growing; icons overflow upward. */}
+      <motion.div style={{ width: size }} className="relative h-10">
+        <motion.div
+          style={{ width: size, height: size }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2"
+        >
+          <item.icon className="w-full h-full drop-shadow-[0_3px_6px_rgba(0,0,0,0.45)]" />
+        </motion.div>
+      </motion.div>
+      <span className="dock-tooltip">{item.label}</span>
+    </motion.button>
+  );
+};
 
 const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
+  // Infinity parks every icon at its base size while the cursor is away.
+  const mouseX = useMotionValue(Number.POSITIVE_INFINITY);
+
   const openExternal = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -79,21 +126,35 @@ const Dock: React.FC<DockProps> = ({ onOpenWindow }) => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
       >
-        <div className="dock-container px-1.5 py-1 flex items-end gap-0.5">
+        <div
+          className="dock-container px-1.5 py-1 flex items-end gap-0.5"
+          onMouseMove={(e) => mouseX.set(e.clientX)}
+          onMouseLeave={() => mouseX.set(Number.POSITIVE_INFINITY)}
+        >
           {mainApps.map((item, index) => (
-            <DockIcon key={item.label} item={item} index={index} />
+            <DockIcon key={item.label} item={item} index={index} mouseX={mouseX} />
           ))}
           
           <div className="dock-divider" />
           
           {portfolioApps.map((item, index) => (
-            <DockIcon key={item.label} item={item} index={index + mainApps.length} />
+            <DockIcon
+              key={item.label}
+              item={item}
+              index={index + mainApps.length}
+              mouseX={mouseX}
+            />
           ))}
           
           <div className="dock-divider" />
           
           {externalApps.map((item, index) => (
-            <DockIcon key={item.label} item={item} index={index + mainApps.length + portfolioApps.length} />
+            <DockIcon
+              key={item.label}
+              item={item}
+              index={index + mainApps.length + portfolioApps.length}
+              mouseX={mouseX}
+            />
           ))}
         </div>
       </motion.div>

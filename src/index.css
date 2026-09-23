@@ -145,11 +145,13 @@
   }
 
   .dock-icon-btn {
-    @apply p-1 transition-all duration-200;
+    /* No CSS transition here - framer-motion drives the magnification and
+       tap spring, and transition-all would ease its transforms on top. */
+    @apply p-1;
   }
 
   .dock-tooltip {
-    @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-md text-xs font-medium text-white whitespace-nowrap opacity-0 pointer-events-none transition-opacity;
+    @apply absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-md text-xs font-medium text-white whitespace-nowrap opacity-0 pointer-events-none transition-opacity;
     background: rgba(40, 40, 40, 0.9);
     backdrop-filter: blur(10px);
   }
